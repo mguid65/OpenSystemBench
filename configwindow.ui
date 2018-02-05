@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigWindow</class>
+ <widget class="QMainWindow" name="ConfigWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>468</width>
+    <height>646</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Configure Benchmark</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QRadioButton" name="stan_radio">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>60</y>
+      <width>165</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Standard</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="cust_radio">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>110</y>
+      <width>146</width>
+      <height>40</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Custom</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="config_label">
+    <property name="geometry">
+     <rect>
+      <x>18</x>
+      <y>18</y>
+      <width>278</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Select Configuration:</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="cust_opt" native="true">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>170</y>
+      <width>139</width>
+      <height>180</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="0" column="0">
+      <widget class="QCheckBox" name="CPU_check">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>CPU</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">cust_opt_buttons</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QCheckBox" name="GPU_check">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>GPU</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">cust_opt_buttons</string>
+       </attribute>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QCheckBox" name="IO_check">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>I/O</string>
+       </property>
+       <attribute name="buttonGroup">
+        <string notr="true">cust_opt_buttons</string>
+       </attribute>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>468</width>
+     <height>39</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="windowTitle">
+    <string>Configure Benchmark</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="cust_opt_buttons"/>
+ </buttongroups>
+</ui>
