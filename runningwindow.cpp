@@ -12,3 +12,8 @@ RunningWindow::~RunningWindow()
 {
     delete ui;
 }
+
+void RunningWindow::on_pushButton_clicked()
+{
+    this->close();
+}
