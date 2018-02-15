@@ -25,10 +25,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        configwindow.cpp
+        configwindow.cpp \
+    runningwindow.cpp \
+    resultwindow.cpp
 
 HEADERS += \
-        configwindow.h
+        configwindow.h \
+    runningwindow.h \
+    resultwindow.h
 
 FORMS += \
-        configwindow.ui
+        configwindow.ui \
+    runningwindow.ui \
+    resultwindow.ui

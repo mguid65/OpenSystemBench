@@ -15,6 +15,9 @@ public:
     explicit RunningWindow(QWidget *parent = 0);
     ~RunningWindow();
 
+private slots:
+    void on_pushButton_clicked();
+
 private:
     Ui::RunningWindow *ui;
 };
