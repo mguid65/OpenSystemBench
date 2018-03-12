@@ -1,0 +1,4 @@
+#ifndef BENCHBUILDER_H
+#define BENCHBUILDER_H
+
+#endif // BENCHBUILDER_H
