@@ -14,7 +14,7 @@
    <string>Running Benchmark</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPlainTextEdit" name="plainTextEdit">
+   <widget class="RunningLog" name="plainTextEdit">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -40,6 +40,13 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>RunningLog</class>
+   <extends>QPlainTextEdit</extends>
+   <header>runninglog.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

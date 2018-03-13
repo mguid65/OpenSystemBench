@@ -16,7 +16,7 @@
 #include <chrono>
 #include <thread>
 #include <future>
-#include "nbody.h"
+#include "Algorithms/headers/nbody.h"
 
 
 static const double PI = 3.141592653589793;
@@ -221,6 +221,11 @@ double runThread() {
 }
 NBody::NBody(){}
 double NBody::runAlgorithm() {
-    std::future<double> ret = std::async(&runThread);
-    return ret.get();
+    //std::future<double> ret = std::async(&runThread);
+    //return ret.get();
+    double res = runThread();
+    return res;
+}
+string NBody::getName() {
+    return "NBody";
 }

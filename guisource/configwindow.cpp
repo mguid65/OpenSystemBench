@@ -1,6 +1,8 @@
-#include "configwindow.h"
+#include "headers/configwindow.h"
 #include "ui_configwindow.h"
-#include ""
+#include "benchbuilder.h"
+#include "thread.h"
+
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ConfigWindow)
@@ -17,11 +19,17 @@ void ConfigWindow::quit()
     this->close();
 }
 
-void ConfigWindow::createRunWindow()
+void ConfigWindow::createRunWindow(bool *config_)
 {
+    quit();
     runningWindow = new RunningWindow();
 
     runningWindow->show();
+
+    runningWindow->updateText(QString::fromStdString("Running..."));
+
+    BenchBuilder b(config_ ,runningWindow);
+    double *results = b.runBench();
 }
 
 void ConfigWindow::on_cust_radio_toggled(bool checked)
@@ -37,6 +45,7 @@ void ConfigWindow::on_quit_button_clicked()
 
 void ConfigWindow::on_run_button_clicked()
 {
+    //this needs to be put inside a Thread so it doesnt interrupt the main event loop
     bool config [4] = { false, false, false, false };
     if(ui->stan_radio->isChecked()) {
         config[0] = true;
@@ -50,6 +59,6 @@ void ConfigWindow::on_run_button_clicked()
             config[3] = true;
         }
     }
-    createRunWindow();
-    quit();
+
+    createRunWindow(config);
 }

@@ -1,7 +1,7 @@
 //Tester for Algorithm Strategy
 //Matthew Guidry March 2018
 //
-#include "algorithm.h"
+#include "Algorithms/headers/algorithm.h"
 #include <iostream>
 
 using namespace std;

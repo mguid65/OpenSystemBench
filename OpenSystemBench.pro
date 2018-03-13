@@ -25,16 +25,30 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        configwindow.cpp \
-    runningwindow.cpp \
-    resultwindow.cpp
+        guisource/configwindow.cpp \
+    guisource/runningwindow.cpp \
+    guisource/resultwindow.cpp \
+    Algorithms/algorithm.cpp \
+    Algorithms/nbody.cpp \
+    benchbuilder.cpp \
+    guisource/runninglog.cpp \
+    guisource/thread.cpp
 
 HEADERS += \
-        configwindow.h \
-    runningwindow.h \
-    resultwindow.h
+        headers/configwindow.h \
+    headers/runninglog.h \
+    headers/runningwindow.h \
+    headers/resultwindow.h \
+    Algorithms/headers/algorithm.h \
+    Algorithms/headers/algorithminterface.h \
+    Algorithms/headers/nbody.h \
+    benchbuilder.h \
+    headers/thread.h
 
 FORMS += \
-        configwindow.ui \
-    runningwindow.ui \
-    resultwindow.ui
+        guistructure/configwindow.ui \
+    guistructure/runningwindow.ui \
+    guistructure/resultwindow.ui
+
+INCLUDEPATH += \
+        headers/

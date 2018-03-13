@@ -1,7 +1,7 @@
 //Context for algorithm strategy
 //Matthew Guidry March 2018
 //
-#include "algorithm.h"
+#include "Algorithms/headers/algorithm.h"
 
 Algorithm::Algorithm(AlgorithmInterface *algorithm) {
     algorithm_ = algorithm;
@@ -9,6 +9,9 @@ Algorithm::Algorithm(AlgorithmInterface *algorithm) {
 void Algorithm::runAlgorithm() {
     double time_ = algorithm_->runAlgorithm();
     setTime(time_);
+}
+string Algorithm::getName() {
+    return algorithm_->getName();
 }
 double Algorithm::getTime() {
     return cpuTime;

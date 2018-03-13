@@ -1,4 +1,4 @@
-#include "resultwindow.h"
+#include "headers/resultwindow.h"
 #include "ui_resultwindow.h"
 
 ResultWindow::ResultWindow(QWidget *parent) :
