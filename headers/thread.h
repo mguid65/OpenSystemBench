@@ -2,16 +2,23 @@
 #define THREAD_H
 #include <QThread>
 #include <QString>
+#include "Algorithms/headers/algorithm.h"
+#include "headers/runningwindow.h"
 
 class Thread : public QThread
 {
  Q_OBJECT
-
+public:
+    Thread(bool * config, RunningWindow * runningWindow);
+    ~Thread();
 signals:
+ void finished(double*);
  void signalText(QString);
-
 protected:
  virtual void run();
+private:
+ RunningWindow * runningWindow;
+ bool * config;
 };
 
 #endif // THREAD_H

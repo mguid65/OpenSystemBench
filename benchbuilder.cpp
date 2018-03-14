@@ -1,9 +1,11 @@
 #include "benchbuilder.h"
 #include <string>
 #include <sstream>
+#include <QThread>
 
 BenchBuilder::BenchBuilder(){}
-BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_) {
+BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_) {
+    pass=pass_;
     running = running_;
     if(config_[0]) {
         createStandardBench();
@@ -18,29 +20,27 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_) {
         }
     }
 }
-double* BenchBuilder::runBench() {
+void BenchBuilder::runBench() {
 
     double results[algList.size()];
     int i=0;
 
     for (Algorithm &alg : algList ) {
-        running->repaint();
         string name = alg.getName();
-        QString qstr = QString::fromStdString(name);
-        running->updateText(qstr);
+        emit pass->signalText(QString::fromStdString(name));
 
         alg.runAlgorithm();
 
         double time_ = alg.getTime();
 
         string strtime = to_string(time_);
-        QString qstrtime = QString::fromStdString(strtime);
-        running->updateText(qstrtime);
-        running->repaint();
+        emit pass->signalText(QString::fromStdString(strtime));
+
         results[i] = time_;
         i++;
     }
-    return results;
+
+    emit pass->finished(results);
 }
 
 void BenchBuilder::createStandardBench() {

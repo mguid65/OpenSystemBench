@@ -21,3 +21,9 @@ void RunningWindow::on_quit_button2_clicked()
 {
     this->close();
 }
+void RunningWindow::handleFinished(double *result) {
+    this->close();
+    resultWindow = new ResultWindow(0,result);
+    resultWindow->show();
+
+}

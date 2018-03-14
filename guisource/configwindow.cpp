@@ -1,7 +1,7 @@
 #include "headers/configwindow.h"
 #include "ui_configwindow.h"
-#include "benchbuilder.h"
-#include "thread.h"
+#include "headers/thread.h"
+#include <QThread>
 
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,15 +21,17 @@ void ConfigWindow::quit()
 
 void ConfigWindow::createRunWindow(bool *config_)
 {
-    quit();
     runningWindow = new RunningWindow();
-
     runningWindow->show();
+    QThread* thread = new QThread;
+    Thread* worker = new Thread(config_, runningWindow);
+    worker->moveToThread(thread);
 
+    connect(worker, SIGNAL(signalText(QString)), runningWindow, SLOT(updateText(QString)));
+    connect(worker, SIGNAL(finished(double*)), runningWindow, SLOT(handleFinished(double*)));
+    worker->start();
     runningWindow->updateText(QString::fromStdString("Running..."));
-
-    BenchBuilder b(config_ ,runningWindow);
-    double *results = b.runBench();
+    quit();
 }
 
 void ConfigWindow::on_cust_radio_toggled(bool checked)

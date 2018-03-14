@@ -1,7 +1,7 @@
 #ifndef RUNNINGWINDOW_H
 #define RUNNINGWINDOW_H
 #include "headers/runninglog.h"
-
+#include "headers/resultwindow.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -15,8 +15,11 @@ class RunningWindow : public QMainWindow
 public:
     explicit RunningWindow(QWidget *parent = 0);
     ~RunningWindow();
+private:
+    ResultWindow * resultWindow;
 public slots:
     void updateText(const QString& text);
+    void handleFinished(double* result);
 private slots:
     void on_quit_button2_clicked();
 
