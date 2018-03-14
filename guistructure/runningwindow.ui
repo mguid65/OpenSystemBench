@@ -14,7 +14,7 @@
    <string>Running Benchmark</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="RunningLog" name="plainTextEdit">
+   <widget class="RunningLog" name="run_status_viewer">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -22,6 +22,9 @@
       <width>761</width>
       <height>241</height>
      </rect>
+    </property>
+    <property name="textInteractionFlags">
+     <set>Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
     </property>
    </widget>
    <widget class="QPushButton" name="quit_button2">

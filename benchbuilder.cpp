@@ -39,6 +39,10 @@ void BenchBuilder::runBench() {
         results[i] = time_;
         i++;
     }
+    //the next few lines are only for user experience
+    emit pass->signalText(QString::fromStdString("Preparing Results..."));
+    //give a status update and wait so a user can read it before jumping to results window
+    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 
     emit pass->finished(results);
 }

@@ -16,9 +16,15 @@ public:
     ~ResultWindow();
     void displayResults();
 
+private slots:
+    void on_quit_button_clicked();
+    void quit();
+    void on_reset_button_clicked();
+
 private:
     Ui::ResultWindow *ui;
     double *result;
+    //ConfigWindow * configWindow;
 };
 
 #endif // RESULTWINDOW_H

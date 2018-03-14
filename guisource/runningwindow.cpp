@@ -1,5 +1,7 @@
 #include "headers/runningwindow.h"
 #include "ui_runningwindow.h"
+#include <chrono>
+#include <thread>
 
 RunningWindow::RunningWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -14,16 +16,18 @@ RunningWindow::~RunningWindow()
 }
 
 void RunningWindow::updateText(const QString& text) {
-    ui->plainTextEdit->textUpdate(text);
+    ui->run_status_viewer->textUpdate(text);
 }
 
 void RunningWindow::on_quit_button2_clicked()
 {
+    quit();
+}
+void RunningWindow::quit() {
     this->close();
 }
 void RunningWindow::handleFinished(double *result) {
     this->close();
     resultWindow = new ResultWindow(0,result);
     resultWindow->show();
-
 }

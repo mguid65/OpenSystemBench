@@ -22,7 +22,7 @@ public slots:
     void handleFinished(double* result);
 private slots:
     void on_quit_button2_clicked();
-
+    void quit();
 private:
     Ui::RunningWindow *ui;
 };

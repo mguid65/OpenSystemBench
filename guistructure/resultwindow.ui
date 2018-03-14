@@ -14,7 +14,7 @@
    <string>Results</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="submit_button">
     <property name="geometry">
      <rect>
       <x>1178</x>
@@ -27,7 +27,7 @@
      <string>Submit</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="save_result_button">
     <property name="geometry">
      <rect>
       <x>1298</x>
@@ -40,7 +40,7 @@
      <string>Save</string>
     </property>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="result_table">
     <property name="geometry">
      <rect>
       <x>25</x>
@@ -50,7 +50,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="reset_button">
     <property name="geometry">
      <rect>
       <x>1018</x>
@@ -63,7 +63,7 @@
      <string>Start Over</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="quit_button">
     <property name="geometry">
      <rect>
       <x>1390</x>
@@ -87,7 +87,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

@@ -2,7 +2,7 @@
 #define CONFIGWINDOW_H
 
 #include <QMainWindow>
-#include "runningwindow.h"
+#include "headers/runningwindow.h"
 
 namespace Ui {
 class ConfigWindow;
