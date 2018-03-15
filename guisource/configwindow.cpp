@@ -42,7 +42,12 @@ void ConfigWindow::createRunWindow(bool *config_)
 void ConfigWindow::on_cust_radio_toggled(bool checked)
 {
     ui->CPU_check->setEnabled(checked & true);
-    ui->IO_check->setEnabled(checked & true);
+    if(ui->CPU_check->isChecked()) {
+        ui->nbody->setEnabled(true);
+        ui->pidigits->setEnabled(true);
+    }
+
+    //ui->IO_check->setEnabled(checked & true);
 }
 
 void ConfigWindow::on_quit_button_clicked()
@@ -52,7 +57,7 @@ void ConfigWindow::on_quit_button_clicked()
 
 void ConfigWindow::on_run_button_clicked()
 {
-    //this needs to be put inside a Thread so it doesnt interrupt the main event loop
+
     bool config [6] = { false, false, false, false, false, false };
     if(ui->stan_radio->isChecked()) {
         config[0] = true;
@@ -93,4 +98,10 @@ void ConfigWindow::on_run_button_clicked()
 void ConfigWindow::on_CPU_check_toggled(bool checked){
     ui->nbody->setEnabled(checked & true);
     ui->pidigits->setEnabled(checked & true);
+}
+
+void ConfigWindow::on_stan_radio_toggled()
+{
+    ui->nbody->setEnabled(false);
+    ui->pidigits->setEnabled(false);
 }

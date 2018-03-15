@@ -2,7 +2,7 @@
  * http://benchmarksgame.alioth.debian.org/
  *
  * contributed by Alessandro Power
- * modified for OpenSystemBench by Matthew Guidry
+ * modified for use as concrete strategy for OpenSystemBench, by Matthew Guidry
  */
 
 #include <gmpxx.h>

@@ -1,4 +1,4 @@
-//Header for Nbody concrete Algorithm Strategy
+//Header for Concrete Algorithm Strategies
 //Matthew Guidry March 2018
 //
 #include "algorithminterface.h"

@@ -5,7 +5,7 @@
    modified slightly by Chad Whipkey
    converted from java to c++,added sse support, by Branimir Maksimovic
    modified by Vaclav Zeman
-   modified for use as test concrete strategy for OpenSystemBench Matthew Guidry
+   modified for use as concrete strategy for OpenSystemBench, by Matthew Guidry
 */
 
 #include <cstdio>

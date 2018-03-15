@@ -34,6 +34,8 @@ private slots:
 
     void on_CPU_check_toggled(bool checked);
 
+    void on_stan_radio_toggled();
+
 private:
     Ui::ConfigWindow *ui;
 };
