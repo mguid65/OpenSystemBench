@@ -21,12 +21,12 @@ NBody Simulation
     * ~~Quit Button~~
 * ~~Create Algorithm Strategy~~
 * Add Algorithms
-  * CPU Single Core
-    * ~~NBodyTest~~ << test only; will be custom implemented
-    * NBody
-    * PiDigits
+  * ~~CPU Single Core~~
+    * ~~NBody~~
+    * ~~PiDigits~~
   * IO
     * Find good IO bound Algorithms
+  * Create Multicore Section
 * ~~Test Algorithm Strategy~~
 
 
