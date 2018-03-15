@@ -26,8 +26,12 @@ void RunningWindow::on_quit_button2_clicked()
 void RunningWindow::quit() {
     this->close();
 }
-void RunningWindow::handleFinished(double *result) {
+void RunningWindow::handleResult(double result){
+    results.push_back(result);
+}
+void RunningWindow::handleFinished(QStringList names) {
     this->close();
-    resultWindow = new ResultWindow(0,result);
+    resultWindow = new ResultWindow(results, names,0);
     resultWindow->show();
+    resultWindow->displayResults();
 }

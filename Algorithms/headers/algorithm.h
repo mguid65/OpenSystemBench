@@ -1,7 +1,7 @@
 //Header for Algorithm strategy
 //Matthew Guidry March 2018
 //
-#include "nbody.h"
+#include "abstract.h"
 
 class Algorithm;
 

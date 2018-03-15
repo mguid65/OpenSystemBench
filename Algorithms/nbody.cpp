@@ -16,7 +16,7 @@
 #include <chrono>
 #include <thread>
 #include <future>
-#include "Algorithms/headers/nbody.h"
+#include "Algorithms/headers/abstract.h"
 
 
 static const double PI = 3.141592653589793;

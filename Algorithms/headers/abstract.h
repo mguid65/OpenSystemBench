@@ -9,3 +9,11 @@ class NBody: public AlgorithmInterface {
         std::__cxx11::string getName();
         double runAlgorithm();
 };
+
+class PiDigits: public AlgorithmInterface {
+    public:
+        PiDigits();
+        std::__cxx11::string getName();
+        double runAlgorithm();
+};
+

@@ -1,8 +1,9 @@
 #ifndef CONFIGWINDOW_H
 #define CONFIGWINDOW_H
 
-#include <QMainWindow>
 #include "headers/runningwindow.h"
+#include "headers/nooptionsselected.h"
+#include <QMainWindow>
 
 namespace Ui {
 class ConfigWindow;
@@ -30,6 +31,8 @@ private slots:
     void on_run_button_clicked();
 
     void quit();
+
+    void on_CPU_check_toggled(bool checked);
 
 private:
     Ui::ConfigWindow *ui;

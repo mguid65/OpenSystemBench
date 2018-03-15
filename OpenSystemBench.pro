@@ -32,7 +32,9 @@ SOURCES += \
     Algorithms/nbody.cpp \
     benchbuilder.cpp \
     guisource/runninglog.cpp \
-    guisource/thread.cpp
+    guisource/thread.cpp \
+    guisource/nooptionsselected.cpp \
+    Algorithms/pidigits.cpp
 
 HEADERS += \
         headers/configwindow.h \
@@ -41,14 +43,18 @@ HEADERS += \
     headers/resultwindow.h \
     Algorithms/headers/algorithm.h \
     Algorithms/headers/algorithminterface.h \
-    Algorithms/headers/nbody.h \
     benchbuilder.h \
-    headers/thread.h
+    headers/thread.h \
+    headers/nooptionsselected.h \
+    Algorithms/headers/abstract.h
 
 FORMS += \
         guistructure/configwindow.ui \
     guistructure/runningwindow.ui \
-    guistructure/resultwindow.ui
+    guistructure/resultwindow.ui \
+    guistructure/nooptionsselected.ui
 
 INCLUDEPATH += \
         headers/
+
+LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp

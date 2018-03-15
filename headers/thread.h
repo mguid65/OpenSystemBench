@@ -7,18 +7,22 @@
 
 class Thread : public QThread
 {
- Q_OBJECT
+    Q_OBJECT
+
 public:
     Thread(bool * config, RunningWindow * runningWindow);
     ~Thread();
 signals:
- void finished(double*);
- void signalText(QString);
+    void finished(QStringList);
+    void signalResult(double);
+    void signalText(QString);
+
 protected:
- virtual void run();
+    virtual void run();
+
 private:
- RunningWindow * runningWindow;
- bool * config;
+    RunningWindow * runningWindow;
+    bool * config;
 };
 
 #endif // THREAD_H

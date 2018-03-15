@@ -2,6 +2,7 @@
 #define RESULTWINDOW_H
 
 #include <QMainWindow>
+#include <QStringList>
 
 namespace Ui {
 class ResultWindow;
@@ -12,7 +13,7 @@ class ResultWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit ResultWindow(QWidget *parent = 0, double *result=0);
+    explicit ResultWindow(std::vector<double> results, const QStringList& names, QWidget *parent = 0 );
     ~ResultWindow();
     void displayResults();
 
@@ -20,10 +21,12 @@ private slots:
     void on_quit_button_clicked();
     void quit();
     void on_reset_button_clicked();
+    double convertTimeToScore(double time);
 
 private:
     Ui::ResultWindow *ui;
-    double *result;
+    QStringList names;
+    std::vector<double> results;
     //ConfigWindow * configWindow;
 };
 
