@@ -207,7 +207,11 @@ public:
         return e;
     }
 };
-double runThread() {
+
+NBody::NBody(){}
+double NBody::runAlgorithm() {
+    //std::future<double> ret = std::async(&runThread);
+    //return ret.get();
     const int n = 50000000;
     auto begin = std::chrono::high_resolution_clock::now();
     NBodySystem bodies;
@@ -218,13 +222,6 @@ double runThread() {
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
     return duration / 1E9;
-}
-NBody::NBody(){}
-double NBody::runAlgorithm() {
-    //std::future<double> ret = std::async(&runThread);
-    //return ret.get();
-    double res = runThread();
-    return res;
 }
 string NBody::getName() {
     return "NBody";

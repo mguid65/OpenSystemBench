@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>512</width>
+    <width>612</width>
     <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>512</width>
+    <width>612</width>
     <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>512</width>
+    <width>612</width>
     <height>700</height>
    </size>
   </property>
@@ -78,8 +78,8 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>160</y>
-      <width>271</width>
+      <y>170</y>
+      <width>571</width>
       <height>321</height>
      </rect>
     </property>
@@ -93,7 +93,7 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>130</y>
+       <y>170</y>
        <width>170</width>
        <height>43</height>
       </rect>
@@ -108,8 +108,8 @@
      </property>
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>180</y>
+       <x>10</x>
+       <y>240</y>
        <width>85</width>
        <height>43</height>
       </rect>
@@ -153,13 +153,74 @@
      <property name="geometry">
       <rect>
        <x>50</x>
-       <y>80</y>
+       <y>120</y>
        <width>124</width>
        <height>43</height>
       </rect>
      </property>
      <property name="text">
       <string>nbody</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="single">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>171</width>
+       <height>37</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Single Core:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="multi">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>290</x>
+       <y>80</y>
+       <width>151</width>
+       <height>37</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Multi Core:</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="mandelbrot">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>120</y>
+       <width>201</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>mandelbrot</string>
+     </property>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>240</x>
+       <y>80</y>
+       <width>21</width>
+       <height>141</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
     </widget>
    </widget>
@@ -211,7 +272,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>512</width>
+     <width>612</width>
      <height>42</height>
     </rect>
    </property>

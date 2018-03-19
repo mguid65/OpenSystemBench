@@ -20,7 +20,7 @@ ResultWindow::~ResultWindow()
 }
 
 double ResultWindow::convertTimeToScore(double time) {
-    return (.001/time)*100000000;
+    return (.001/time)*10000000;
 }
 
 void ResultWindow::displayResults() {

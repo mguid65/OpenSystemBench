@@ -19,16 +19,17 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_)
             if(config_[4]) {
                 algList.push_back(new PiDigits());
             }
+            if(config_[5]) {
+                algList.push_back(new Mandelbrot());
+            }
         }
-        if(config_[5]) {
+        if(config_[6]) {
             //temporary
             algList.push_back(nullptr);
         }
     }
 }
 void BenchBuilder::runBench() {
-
-    double results[algList.size()];
     QStringList names;
     for (Algorithm &alg : algList ) {
         string name = alg.getName();
@@ -56,4 +57,5 @@ void BenchBuilder::runBench() {
 void BenchBuilder::createStandardBench() {
     algList.push_back(new NBody());
     algList.push_back(new PiDigits());
+    algList.push_back(new Mandelbrot());
 }

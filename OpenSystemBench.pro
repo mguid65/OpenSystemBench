@@ -26,7 +26,8 @@ SOURCES += \
     guisource/runninglog.cpp \
     guisource/thread.cpp \
     guisource/nooptionsselected.cpp \
-    Algorithms/pidigits.cpp
+    Algorithms/pidigits.cpp \
+    Algorithms/mandelbrot.cpp
 
 HEADERS += \
         headers/configwindow.h \
@@ -49,7 +50,8 @@ FORMS += \
 INCLUDEPATH += \
         headers/
 
-LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp
+LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp -lgomp
 
-CONFIG      += static
+##CONFIG      += static
 
+QMAKE_CXXFLAGS += -fopenmp

@@ -17,3 +17,9 @@ class PiDigits: public AlgorithmInterface {
         double runAlgorithm();
 };
 
+class Mandelbrot: public AlgorithmInterface {
+    public:
+        Mandelbrot();
+        std::__cxx11::string getName();
+        double runAlgorithm();
+};
