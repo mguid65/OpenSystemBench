@@ -52,6 +52,6 @@ INCLUDEPATH += \
 
 LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp -lgomp
 
-##CONFIG      += static
+CONFIG      += static
 
 QMAKE_CXXFLAGS += -fopenmp
