@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QStringList>
-
+#include <QFile>
 namespace Ui {
 class ResultWindow;
 }
@@ -22,6 +22,8 @@ private slots:
     void quit();
     void on_reset_button_clicked();
     double convertTimeToScore(double time);
+
+    void on_save_result_button_clicked();
 
 private:
     Ui::ResultWindow *ui;

@@ -4,6 +4,10 @@
 #include <QString>
 #include <iostream>
 #include <QVariant>
+#include <QFileDialog>
+#include <vector>
+#include <string>
+#include <iostream>
 
 ResultWindow::ResultWindow(std::vector<double> results, const QStringList& names, QWidget *parent) :
     QMainWindow(parent),
@@ -28,7 +32,7 @@ void ResultWindow::displayResults() {
 
     table_list << "Algorithm" << "Time" << "Score";
 
-    ui->result_table->setRowCount(12);
+    //ui->result_table->setRowCount(12);
     ui->result_table->setColumnCount(3);
 
     ui->result_table->setHorizontalHeaderLabels(table_list);
@@ -36,6 +40,7 @@ void ResultWindow::displayResults() {
     int row = 0;
 
     foreach(const QString str, names) {
+        ui->result_table->insertRow(row);
         QTableWidgetItem *newItem = ui->result_table->item(row,0);
 
         if(!newItem) {
@@ -88,4 +93,25 @@ void ResultWindow::on_reset_button_clicked()
     quit();
     ConfigWindow * configWindow = new ConfigWindow();
     configWindow->show();
+}
+
+void ResultWindow::on_save_result_button_clicked()
+{
+     QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"), ".csv");
+     QFile f(fileName);
+     f.open(QIODevice::WriteOnly);
+     char comma[] = ",";
+     char end[] = ",\n";
+     char headers[] = "Algorithm,Time,Score,\n";
+     f.write(headers);
+     for(int i = 0; i < names.length(); ++i) {
+        f.write(ui->result_table->item(i,0)->text().toLocal8Bit());
+        f.write(comma);
+        f.write(ui->result_table->item(i,1)->text().toLocal8Bit());
+        f.write(comma);
+        f.write(ui->result_table->item(i,2)->text().toLocal8Bit());
+        f.write(end);
+     }
+     f.close();
+
 }
