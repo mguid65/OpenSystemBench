@@ -48,6 +48,7 @@ void ConfigWindow::on_cust_radio_toggled(bool checked)
         ui->mandelbrot->setEnabled(true);
         ui->single->setEnabled(true);
         ui->multi->setEnabled(true);
+        ui->spectral->setEnabled(true);
     }
 
     //ui->IO_check->setEnabled(checked & true);
@@ -61,7 +62,7 @@ void ConfigWindow::on_quit_button_clicked()
 void ConfigWindow::on_run_button_clicked()
 {
 
-    bool config [7] = { false, false, false, false, false, false, false };
+    bool config [8] = { false, false, false, false, false, false, false, false };
     //standard test
     if(ui->stan_radio->isChecked()) {
         config[0] = true;
@@ -73,7 +74,7 @@ void ConfigWindow::on_run_button_clicked()
             if (ui->CPU_check->isChecked()) {
                 //cpu check
                 config[2] = true;
-                if(ui->nbody->isChecked() || ui->pidigits->isChecked() || ui->mandelbrot->isChecked()) {
+                if(ui->nbody->isChecked() || ui->pidigits->isChecked() || ui->mandelbrot->isChecked() || ui->spectral->isChecked()) {
                     //single core
                     if(ui->nbody->isChecked()) {
                         config[3] = true;
@@ -86,6 +87,10 @@ void ConfigWindow::on_run_button_clicked()
                     if(ui->mandelbrot->isChecked()) {
                         config[5] = true;
                     }
+                    //spectral-norm
+                    if(ui->spectral->isChecked()) {
+                        config[6] = true;
+                    }
                     createRunWindow(config);
                 }
                 else {
@@ -93,7 +98,7 @@ void ConfigWindow::on_run_button_clicked()
                     errDialog.exec();
                 }
                 if (ui->IO_check->isChecked()) {
-                    config[6] = true;
+                    config[7] = true;
                     createRunWindow(config);
                 }
             }
@@ -112,6 +117,7 @@ void ConfigWindow::on_CPU_check_toggled(bool checked){
     ui->mandelbrot->setEnabled(checked & true);
     ui->single->setEnabled(checked & true);
     ui->multi->setEnabled(checked & true);
+    ui->spectral->setEnabled(checked & true);
 }
 
 void ConfigWindow::on_stan_radio_toggled()
@@ -121,4 +127,5 @@ void ConfigWindow::on_stan_radio_toggled()
     ui->mandelbrot->setEnabled(false);
     ui->single->setEnabled(false);
     ui->multi->setEnabled(false);
+    ui->spectral->setEnabled(false);
 }

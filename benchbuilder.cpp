@@ -22,8 +22,11 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_)
             if(config_[5]) {
                 algList.push_back(new Mandelbrot());
             }
+            if(config_[6]) {
+                algList.push_back(new SpectralNorm());
+            }
         }
-        if(config_[6]) {
+        if(config_[7]) {
             //temporary
             algList.push_back(nullptr);
         }
@@ -58,4 +61,5 @@ void BenchBuilder::createStandardBench() {
     algList.push_back(new NBody());
     algList.push_back(new PiDigits());
     algList.push_back(new Mandelbrot());
+    algList.push_back(new SpectralNorm());
 }

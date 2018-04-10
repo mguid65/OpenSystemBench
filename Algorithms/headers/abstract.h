@@ -6,20 +6,27 @@
 class NBody: public AlgorithmInterface {
     public:
         NBody();
-        std::__cxx11::string getName();
+        std::string getName();
         double runAlgorithm();
 };
 
 class PiDigits: public AlgorithmInterface {
     public:
         PiDigits();
-        std::__cxx11::string getName();
+        std::string getName();
         double runAlgorithm();
 };
 
 class Mandelbrot: public AlgorithmInterface {
     public:
         Mandelbrot();
-        std::__cxx11::string getName();
+        std::string getName();
+        double runAlgorithm();
+};
+
+class SpectralNorm: public AlgorithmInterface {
+    public:
+        SpectralNorm();
+        std::string getName();
         double runAlgorithm();
 };

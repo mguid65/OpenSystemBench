@@ -223,6 +223,22 @@
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
+    <widget class="QCheckBox" name="spectral">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>300</x>
+       <y>170</y>
+       <width>231</width>
+       <height>43</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Spectral-Norm</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="run_button">
     <property name="geometry">

@@ -27,7 +27,8 @@ SOURCES += \
     guisource/thread.cpp \
     guisource/nooptionsselected.cpp \
     Algorithms/pidigits.cpp \
-    Algorithms/mandelbrot.cpp
+    Algorithms/mandelbrot.cpp \
+    Algorithms/spectral-norm.cpp
 
 HEADERS += \
         headers/configwindow.h \
