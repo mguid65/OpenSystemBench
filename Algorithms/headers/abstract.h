@@ -30,3 +30,10 @@ class SpectralNorm: public AlgorithmInterface {
         std::string getName();
         double runAlgorithm();
 };
+
+class BinaryTrees: public AlgorithmInterface {
+    public:
+        BinaryTrees();
+        std::string getName();
+        double runAlgorithm();
+};

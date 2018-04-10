@@ -27,8 +27,9 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_)
             }
         }
         if(config_[7]) {
-            //temporary
-            algList.push_back(nullptr);
+            if(config_[8]) {
+                algList.push_back(new BinaryTrees());
+            }
         }
     }
 }

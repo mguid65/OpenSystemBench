@@ -1,14 +1,12 @@
-// The Computer Language Benchmarks Game
-// http://benchmarksgame.alioth.debian.org/
-//
-// Original C contributed by Sebastien Loisel
-// Conversion to C++ by Jon Harrop
-// OpenMP parallelize by The Anh Tran
-// Add SSE by The Anh Tran
-// Additional SSE optimization by Krzysztof Jakubowski
-
-// g++ -pipe -O3 -march=native -fopenmp -mfpmath=sse -msse2 \
-//     ./spec.c++ -o ./spec.run
+/* The Computer Language Benchmarks Game
+ http://benchmarksgame.alioth.debian.org/
+ Original C contributed by Sebastien Loisel
+ Conversion to C++ by Jon Harrop
+ OpenMP parallelize by The Anh Tran
+ Add SSE by The Anh Tran
+ Additional SSE optimization by Krzysztof Jakubowski
+ Modified for OpenSystemBench by Matthew Guidry 2018
+*/
 
 #include <cmath>
 #include <cstdlib>

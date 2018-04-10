@@ -36,6 +36,8 @@ private slots:
 
     void on_stan_radio_toggled();
 
+    void on_IO_check_toggled(bool checked);
+
 private:
     Ui::ConfigWindow *ui;
 };
