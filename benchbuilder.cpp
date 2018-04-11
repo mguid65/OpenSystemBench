@@ -35,6 +35,7 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_)
 }
 void BenchBuilder::runBench() {
     QStringList names;
+
     for (Algorithm &alg : algList ) {
         string name = alg.getName();
         QString qname = QString::fromStdString(name);

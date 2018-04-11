@@ -29,7 +29,8 @@ SOURCES += \
     Algorithms/pidigits.cpp \
     Algorithms/mandelbrot.cpp \
     Algorithms/spectral-norm.cpp \
-    Algorithms/binarytrees.cpp
+    Algorithms/binarytrees.cpp \
+    guisource/submitwindow.cpp
 
 HEADERS += \
         headers/configwindow.h \
@@ -41,13 +42,15 @@ HEADERS += \
     benchbuilder.h \
     headers/thread.h \
     headers/nooptionsselected.h \
-    Algorithms/headers/abstract.h
+    Algorithms/headers/abstract.h \
+    headers/submitwindow.h
 
 FORMS += \
         guistructure/configwindow.ui \
     guistructure/runningwindow.ui \
     guistructure/resultwindow.ui \
-    guistructure/nooptionsselected.ui
+    guistructure/nooptionsselected.ui \
+    guistructure/submitwindow.ui
 
 INCLUDEPATH += \
         headers/

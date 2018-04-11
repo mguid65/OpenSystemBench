@@ -115,3 +115,14 @@ void ResultWindow::on_save_result_button_clicked()
      f.close();
 
 }
+
+void ResultWindow::on_submit_button_clicked()
+{
+    std::string str;
+    for(int i = 0; i < names.length(); i++) {
+        for(int j = 0; j < 3; j++) {
+            str.append(ui->result_table->item(i,j)->text().toLocal8Bit());
+        }
+    }
+    std::cout << str;
+}

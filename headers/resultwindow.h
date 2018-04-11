@@ -25,6 +25,8 @@ private slots:
 
     void on_save_result_button_clicked();
 
+    void on_submit_button_clicked();
+
 private:
     Ui::ResultWindow *ui;
     QStringList names;

@@ -105,14 +105,12 @@ void ConfigWindow::on_run_button_clicked()
                 NoOptionsSelected errDialog;
                 errDialog.exec();
             }
-
         }
         else {
             NoOptionsSelected errDialog;
             errDialog.exec();
         }
     }
-
 }
 
 void ConfigWindow::on_CPU_check_toggled(bool checked){
