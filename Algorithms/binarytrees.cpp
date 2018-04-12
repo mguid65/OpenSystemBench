@@ -128,5 +128,5 @@ double BinaryTrees::runAlgorithm()
 }
 BinaryTrees::BinaryTrees(){}
 string BinaryTrees::getName() {
-    return "Binary Trees";
+    return "Binary-Trees";
 }

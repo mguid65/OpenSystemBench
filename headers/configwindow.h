@@ -38,8 +38,12 @@ private slots:
 
     void on_IO_check_toggled(bool checked);
 
+    void on_ocbutton_toggled();
+
 private:
     Ui::ConfigWindow *ui;
+    bool OCFLAG;
+    bool STANDARD_FLAG;
 };
 
 #endif // CONFIGWINDOW_H

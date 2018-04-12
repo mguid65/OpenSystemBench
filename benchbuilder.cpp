@@ -6,7 +6,7 @@
 
 BenchBuilder::BenchBuilder(){}
 BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_) {
-    pass=pass_;
+    pass = pass_;
     running = running_;
     if(config_[0]) {
         createStandardBench();
@@ -64,4 +64,5 @@ void BenchBuilder::createStandardBench() {
     algList.push_back(new PiDigits());
     algList.push_back(new Mandelbrot());
     algList.push_back(new SpectralNorm());
+    algList.push_back(new BinaryTrees());
 }

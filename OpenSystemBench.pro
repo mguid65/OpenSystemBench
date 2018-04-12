@@ -30,7 +30,8 @@ SOURCES += \
     Algorithms/mandelbrot.cpp \
     Algorithms/spectral-norm.cpp \
     Algorithms/binarytrees.cpp \
-    guisource/submitwindow.cpp
+    guisource/submitwindow.cpp \
+    guisource/notstandarderror.cpp
 
 HEADERS += \
         headers/configwindow.h \
@@ -43,14 +44,16 @@ HEADERS += \
     headers/thread.h \
     headers/nooptionsselected.h \
     Algorithms/headers/abstract.h \
-    headers/submitwindow.h
+    headers/submitwindow.h \
+    headers/notstandarderror.h
 
 FORMS += \
         guistructure/configwindow.ui \
     guistructure/runningwindow.ui \
     guistructure/resultwindow.ui \
     guistructure/nooptionsselected.ui \
-    guistructure/submitwindow.ui
+    guistructure/submitwindow.ui \
+    guistructure/notstandarderror.ui
 
 INCLUDEPATH += \
         headers/

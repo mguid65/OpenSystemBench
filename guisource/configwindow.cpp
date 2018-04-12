@@ -21,7 +21,7 @@ void ConfigWindow::quit()
 
 void ConfigWindow::createRunWindow(bool *config_)
 {
-    runningWindow = new RunningWindow();
+    runningWindow = new RunningWindow(STANDARD_FLAG, OCFLAG);
     runningWindow->show();
 
     QThread* thread = new QThread;
@@ -74,6 +74,7 @@ void ConfigWindow::on_quit_button_clicked()
  */
 void ConfigWindow::on_run_button_clicked()
 {
+    STANDARD_FLAG = ui->stan_radio->isChecked();
     bool config [9] = { false, false, false, false, false, false, false, false, false };
     //standard test
     if(ui->stan_radio->isChecked()) {
@@ -137,4 +138,10 @@ void ConfigWindow::on_stan_radio_toggled()
 void ConfigWindow::on_IO_check_toggled(bool checked)
 {
     ui->binarytrees->setEnabled(checked & true);
+}
+
+
+void ConfigWindow::on_ocbutton_toggled()
+{
+    OCFLAG = ui->ocbutton->isChecked();
 }

@@ -1,5 +1,7 @@
 #include "headers/resultwindow.h"
 #include "headers/configwindow.h"
+#include "headers/submitwindow.h"
+#include "headers/notstandarderror.h"
 #include "ui_resultwindow.h"
 #include <QString>
 #include <iostream>
@@ -9,10 +11,12 @@
 #include <string>
 #include <iostream>
 
-ResultWindow::ResultWindow(std::vector<double> results, const QStringList& names, QWidget *parent) :
+ResultWindow::ResultWindow(bool STANDARD_FLAG, bool OCFLAG, std::vector<double> results, const QStringList& names, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ResultWindow)
 {
+    this->STANDARD_FLAG = STANDARD_FLAG;
+    this->OCFLAG = OCFLAG;
     this->results = results;
     this->names = names;
     ui->setupUi(this);
@@ -24,15 +28,17 @@ ResultWindow::~ResultWindow()
 }
 
 double ResultWindow::convertTimeToScore(double time) {
-    return (.001/time)*10000000;
+    totalTime +=time;
+    double score = (.001/time)*10000000;
+    totalScore +=score;
+    return score;
 }
 
 void ResultWindow::displayResults() {
     QStringList table_list;
 
-    table_list << "Algorithm" << "Time" << "Score";
+    table_list << "Algorithm" << "Time(s)" << "Score";
 
-    //ui->result_table->setRowCount(12);
     ui->result_table->setColumnCount(3);
 
     ui->result_table->setHorizontalHeaderLabels(table_list);
@@ -78,6 +84,35 @@ void ResultWindow::displayResults() {
 
         row++;
     }
+    QString total = "Totals:";
+    ui->result_table->insertRow(row);
+    QTableWidgetItem *totalStr = ui->result_table->item(row,0);
+    QTableWidgetItem *totTime = ui->result_table->item(row,1);
+    QTableWidgetItem *totScore = ui->result_table->item(row,2);
+
+    if(!totalStr) {
+        totalStr = new QTableWidgetItem;
+        ui->result_table->setItem(row, 0, totalStr);
+    }
+    if(!totTime) {
+        totTime = new QTableWidgetItem;
+        ui->result_table->setItem(row, 1, totTime);
+    }
+    if(!totScore) {
+        totScore = new QTableWidgetItem;
+        ui->result_table->setItem(row, 2, totScore);
+    }
+    totalStr->setText(total);
+    totalStr->setFlags(totalStr->flags() ^ Qt::ItemIsEditable);
+    totalStr->setTextAlignment( Qt::AlignCenter);
+
+    totTime->setData(Qt::DisplayRole, QVariant(totalTime));
+    totTime->setFlags(totTime->flags() ^ Qt::ItemIsEditable);
+    totTime->setTextAlignment( Qt::AlignCenter);
+
+    totScore->setData(Qt::DisplayRole, QVariant(totalScore));
+    totScore->setFlags(totScore->flags() ^ Qt::ItemIsEditable);
+    totScore->setTextAlignment( Qt::AlignCenter);
 }
 void ResultWindow::quit() {
     this->close();
@@ -113,16 +148,37 @@ void ResultWindow::on_save_result_button_clicked()
         f.write(end);
      }
      f.close();
-
 }
 
 void ResultWindow::on_submit_button_clicked()
 {
-    std::string str;
-    for(int i = 0; i < names.length(); i++) {
-        for(int j = 0; j < 3; j++) {
-            str.append(ui->result_table->item(i,j)->text().toLocal8Bit());
+    std::cout << STANDARD_FLAG;
+    if(STANDARD_FLAG) {
+        std::string str;
+        for(int i = 0; i < names.length(); i++) {
+            str.append(";");
+            for(int j = 0; j < 3; j++) {
+                str.append(ui->result_table->item(i,j)->text().toLocal8Bit());
+                if(j!=2) str.append(":");
+            }
         }
+        str.append(std::to_string(totalTime));
+        str.append(";");
+        str.append(std::to_string(totalScore));
+        str.append(";");
+        if(OCFLAG) {
+            str.append("1");
+        }
+        else {
+            str.append("0");
+        }
+
+        SubmitWindow submitWindow(str);
+        submitWindow.exec();
+        std::cout << str;
     }
-    std::cout << str;
+    else {
+        NotStandardError notStandardDialog;
+        notStandardDialog.exec();
+    }
 }
