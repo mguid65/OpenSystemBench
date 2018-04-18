@@ -14,7 +14,7 @@ class RunningWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit RunningWindow(bool STANDARD_FLAG, bool OCFLAG, QWidget *parent = 0);
+    explicit RunningWindow(bool standard_flag, bool ocflag, QWidget *parent = 0);
     ~RunningWindow();
 private:
     ResultWindow * resultWindow;
@@ -28,8 +28,8 @@ private slots:
 private:
     std::vector<double> results;
     Ui::RunningWindow *ui;
-    bool OCFLAG;
-    bool STANDARD_FLAG;
+    bool ocflag;
+    bool standard_flag;
 };
 
 #endif // RUNNINGWINDOW_H

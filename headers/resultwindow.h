@@ -13,7 +13,7 @@ class ResultWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit ResultWindow(bool STANDARD_FLAG, bool OCFLAG, std::vector<double> results, const QStringList& names, QWidget *parent = 0 );
+    explicit ResultWindow(bool standard_flag, bool ocflag, std::vector<double> results, const QStringList& names, QWidget *parent = 0 );
     ~ResultWindow();
     void displayResults();
 
@@ -31,8 +31,8 @@ private:
     std::vector<double> results;
     double totalTime = 0;
     double totalScore = 0;
-    bool OCFLAG;
-    bool STANDARD_FLAG;
+    bool ocflag;
+    bool standard_flag;
 };
 
 #endif // RESULTWINDOW_H

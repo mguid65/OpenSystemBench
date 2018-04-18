@@ -42,8 +42,8 @@ private slots:
 
 private:
     Ui::ConfigWindow *ui;
-    bool OCFLAG;
-    bool STANDARD_FLAG;
+    bool ocflag;
+    bool standard_flag;
 };
 
 #endif // CONFIGWINDOW_H

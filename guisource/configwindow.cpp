@@ -8,6 +8,8 @@ ConfigWindow::ConfigWindow(QWidget *parent) :
     ui(new Ui::ConfigWindow)
 {
     ui->setupUi(this);
+    ocflag=0;
+    standard_flag=0;
 }
 
 ConfigWindow::~ConfigWindow()
@@ -21,7 +23,7 @@ void ConfigWindow::quit()
 
 void ConfigWindow::createRunWindow(bool *config_)
 {
-    runningWindow = new RunningWindow(STANDARD_FLAG, OCFLAG);
+    runningWindow = new RunningWindow(standard_flag, ocflag);
     runningWindow->show();
 
     QThread* thread = new QThread;
@@ -74,7 +76,7 @@ void ConfigWindow::on_quit_button_clicked()
  */
 void ConfigWindow::on_run_button_clicked()
 {
-    STANDARD_FLAG = ui->stan_radio->isChecked();
+    standard_flag = ui->stan_radio->isChecked();
     bool config [9] = { false, false, false, false, false, false, false, false, false };
     //standard test
     if(ui->stan_radio->isChecked()) {
@@ -143,5 +145,5 @@ void ConfigWindow::on_IO_check_toggled(bool checked)
 
 void ConfigWindow::on_ocbutton_toggled()
 {
-    OCFLAG = ui->ocbutton->isChecked();
+    ocflag = ui->ocbutton->isChecked();
 }

@@ -31,7 +31,8 @@ SOURCES += \
     Algorithms/spectral-norm.cpp \
     Algorithms/binarytrees.cpp \
     guisource/submitwindow.cpp \
-    guisource/notstandarderror.cpp
+    guisource/notstandarderror.cpp \
+    client/src/TCPClient.cpp
 
 HEADERS += \
         headers/configwindow.h \
@@ -45,8 +46,8 @@ HEADERS += \
     headers/nooptionsselected.h \
     Algorithms/headers/abstract.h \
     headers/submitwindow.h \
-    headers/notstandarderror.h
-
+    headers/notstandarderror.h \
+    client/src/TCPClient.h
 FORMS += \
         guistructure/configwindow.ui \
     guistructure/runningwindow.ui \

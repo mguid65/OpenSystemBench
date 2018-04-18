@@ -3,12 +3,12 @@
 #include <chrono>
 #include <thread>
 
-RunningWindow::RunningWindow(bool STANDARD_FLAG, bool OCFLAG, QWidget *parent) :
+RunningWindow::RunningWindow(bool standard_flag, bool ocflag, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::RunningWindow)
 {
-    this->OCFLAG = OCFLAG;
-    this->STANDARD_FLAG = STANDARD_FLAG;
+    this->ocflag = ocflag;
+    this->standard_flag = standard_flag;
     ui->setupUi(this);
 }
 
@@ -33,7 +33,7 @@ void RunningWindow::handleResult(double result){
 }
 void RunningWindow::handleFinished(QStringList names) {
     this->close();
-    resultWindow = new ResultWindow(STANDARD_FLAG, OCFLAG,results, names,0);
+    resultWindow = new ResultWindow(standard_flag, ocflag,results, names,0);
     resultWindow->show();
     resultWindow->displayResults();
 }

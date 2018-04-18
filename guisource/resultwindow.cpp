@@ -11,12 +11,12 @@
 #include <string>
 #include <iostream>
 
-ResultWindow::ResultWindow(bool STANDARD_FLAG, bool OCFLAG, std::vector<double> results, const QStringList& names, QWidget *parent) :
+ResultWindow::ResultWindow(bool standard_flag, bool ocflag, std::vector<double> results, const QStringList& names, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::ResultWindow)
 {
-    this->STANDARD_FLAG = STANDARD_FLAG;
-    this->OCFLAG = OCFLAG;
+    this->standard_flag = standard_flag;
+    this->ocflag = ocflag;
     this->results = results;
     this->names = names;
     ui->setupUi(this);
@@ -152,21 +152,20 @@ void ResultWindow::on_save_result_button_clicked()
 
 void ResultWindow::on_submit_button_clicked()
 {
-    std::cout << STANDARD_FLAG;
-    if(STANDARD_FLAG) {
+    std::cout << standard_flag;
+    if(standard_flag) {
         std::string str;
         for(int i = 0; i < names.length(); i++) {
-            str.append(";");
             for(int j = 0; j < 3; j++) {
                 str.append(ui->result_table->item(i,j)->text().toLocal8Bit());
-                if(j!=2) str.append(":");
+                str.append(";");
             }
         }
         str.append(std::to_string(totalTime));
         str.append(";");
         str.append(std::to_string(totalScore));
         str.append(";");
-        if(OCFLAG) {
+        if(ocflag) {
             str.append("1");
         }
         else {
