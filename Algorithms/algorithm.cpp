@@ -1,7 +1,7 @@
 //Context for algorithm strategy
 //Matthew Guidry March 2018
 //
-#include "Algorithms/headers/algorithm.h"
+#include "../Algorithms/headers/algorithm.h"
 
 Algorithm::Algorithm(AlgorithmInterface *algorithm) {
     algorithm_ = algorithm;

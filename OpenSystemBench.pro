@@ -32,7 +32,7 @@ SOURCES += \
     Algorithms/binarytrees.cpp \
     guisource/submitwindow.cpp \
     guisource/notstandarderror.cpp \
-    client/src/TCPClient.cpp
+    client/src/TCPClient.cpp \
 
 HEADERS += \
         headers/configwindow.h \

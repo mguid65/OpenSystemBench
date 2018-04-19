@@ -16,7 +16,7 @@
 #include <thread>
 #include <mutex>
 #include <vector>
-#include "Algorithms/headers/abstract.h"
+#include "../Algorithms/headers/abstract.h"
 
 #include <boost/pool/object_pool.hpp>
 

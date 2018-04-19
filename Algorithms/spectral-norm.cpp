@@ -15,7 +15,7 @@
 #include <omp.h>
 #include <emmintrin.h>
 #include <chrono>
-#include "Algorithms/headers/abstract.h"
+#include "../Algorithms/headers/abstract.h"
 
 template <bool modei> int Index(int i, int j) {
     return (((i + j) * (i + j + 1)) >> 1) + (modei? i : j) + 1;

@@ -13,7 +13,7 @@
 #include <immintrin.h>
 #include <iostream>
 #include <chrono>
-#include "Algorithms/headers/abstract.h"
+#include "../Algorithms/headers/abstract.h"
 
 #ifdef __AVX__
 #define VEC_SIZE 4

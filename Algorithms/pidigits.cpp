@@ -8,7 +8,7 @@
 #include <gmpxx.h>
 #include <cstdlib>
 #include <iostream>
-#include "Algorithms/headers/abstract.h"
+#include "../Algorithms/headers/abstract.h"
 #include <chrono>
 
 class LFT {
