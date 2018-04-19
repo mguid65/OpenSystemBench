@@ -43,6 +43,7 @@ void ResultWindow::displayResults() {
 
     ui->result_table->setHorizontalHeaderLabels(table_list);
 
+
     int row = 0;
 
     foreach(const QString str, names) {
@@ -113,6 +114,8 @@ void ResultWindow::displayResults() {
     totScore->setData(Qt::DisplayRole, QVariant(totalScore));
     totScore->setFlags(totScore->flags() ^ Qt::ItemIsEditable);
     totScore->setTextAlignment( Qt::AlignCenter);
+
+    ui->result_table->resizeColumnsToContents();
 }
 void ResultWindow::quit() {
     this->close();

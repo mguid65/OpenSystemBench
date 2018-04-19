@@ -1,30 +1,68 @@
 #include "../Algorithms/headers/algorithm.h"
 #include "../client/src/TCPClient.h"
+#include <iomanip>
+
+void submitResult(std::string str) {
+    TCPClient tcp;
+
+    if(tcp.setup("72.219.21.177", 47002) != true ) {
+        std::cout << "\nFailure: Unable to Connect to Server\n";
+        std::cout.flush();
+    }
+    else {
+        srand(time(NULL));
+        std::cout << str;
+        tcp.Send(str);
+
+        string rec = tcp.receive();
+
+        if( rec != "" )
+        {
+            std::cout << "\nServer Response: " << rec << "\n";
+            std::cout.flush();
+            tcp.exit();
+        }
+        else {
+            std::cout << "\nFailure: Empty Response\n";
+            std::cout.flush();
+            tcp.exit();
+        }
+    }
+}
 
 double convertTimeToScore(double time) {
-    double score = (.001/time)*10000000;
-    return score;
+    return (.001/time)*10000000;
 }
-int main(int argc, char *argv[])
-{
+
+int main() {
     std::cout << "<<<Press Enter to Begin>>>\n";
     std::cin.ignore();
-    std::vector<Algorithm> algList;
+
+    //Allocate arrays to hold output
 
     double times[5];
     double scores[5];
     std::string names[5];
+
+    //create indexing variable count
     int count = 0;
+
+    //Create a vector of Algorithms to run.
+    std::vector<Algorithm> algList;
+
     algList.push_back(new NBody());
     algList.push_back(new PiDigits());
     algList.push_back(new Mandelbrot());
     algList.push_back(new SpectralNorm());
     algList.push_back(new BinaryTrees());
 
-    std::cout << "Running!\n";
+    std::cout << "Running...\n";
+
+    //Create variables to accumulate total time and score
     double TotalTime = 0;
     double TotalScore = 0;
 
+    // Run each algorithm and record data
     for (Algorithm &alg : algList ) {
         names[count] = alg.getName();
         std::cout << names[count] << "\n";
@@ -42,27 +80,44 @@ int main(int argc, char *argv[])
         std::cout.flush();
         count++;
     }
+    //reset indexing variable count to 0
     count = 0;
     std::cout << "\n\n";
     std::cout.flush();
 
+    //print simple table to std output
     for (double i: times) {
-        std::cout << names[count] << " | ";
-        std::cout << i << "\n";
+        std::cout << std::left << std::setw(14) << names[count] << " | ";
+        std::cout << std::left << std::setw(10) << i << " | ";
+        std::cout << scores[count] << "\n";
         count++;
     }
+    std::cout << std::left << std::setw(14) << "Totals" << " | ";
+    std::cout << std::left << std::setw(10) << TotalTime << " | ";
+    std::cout << TotalScore << "\n";
+    //reset count to 0
     count = 0;
 
     std::cout.flush();
-    std::cout << "Submit? (y/n)\n";
+    std::cout << "\nSubmit to leaderboard? (y/n)\n";
     std::cout.flush();
     char choice;
     std::cin >> choice;
 
     if(choice == 'y') {
-        std::cout << "Give a name for your run: ";
+        //build data string for submission
+        std::cout << "Give a name for your run (1 - 40 characters): ";
         std::string str;
-        std::cin >> str;
+        while(true) {
+            std::cin >> str;
+            if(str.length() < 1 || str.length() > 40) {
+                std::cout << "Invalid Name: Names must be between 1 and 40 characters!\n";
+                std::cout.flush();
+                std::cout << "Give a name for your run: ";
+                std::cout.flush();
+            } else { break; }
+        }
+
         str.append(";");
         for(std::string s: names) {
             str.append(s);
@@ -80,6 +135,7 @@ int main(int argc, char *argv[])
 
         std::cout << "Is this machine overclocked? (y/n)\n";
         std::cout.flush();
+
         char oc;
         std::cin >> oc;
 
@@ -91,29 +147,13 @@ int main(int argc, char *argv[])
         }
         std::cout << str << "\n";
         std::cout.flush();
-        TCPClient tcp;
 
-        if(tcp.setup("72.219.21.177", 47002) != true ) {
-            std::cout << "Failure!";
-        }
-        else {
-            srand(time(NULL));
-            std::cout << str;
-            tcp.Send(str);
+        std::cout << "Are you sure you want to submit? (y/n)\n";
+        std::cout.flush();
+        std::cin >> choice;
 
-            string rec = tcp.receive();
-
-            if( rec != "" )
-            {
-                std::cout << "Server Response:" << rec;
-                std::cout.flush();
-                tcp.exit();
-            }
-            else {
-                std::cout << "Failure!";
-                std::cout.flush();
-                tcp.exit();
-            }
+        if(choice == 'y') {
+            submitResult(str);
         }
     }
 }
