@@ -110,7 +110,7 @@ int main() {
         std::string str;
         while(true) {
             std::cin >> str;
-            if(str.length() < 1 || str.length() > 40) {
+            if(str.length() < 1 || str.length() > 40) {  //error checking if string is not between 1 and 40 chars
                 std::cout << "Invalid Name: Names must be between 1 and 40 characters!\n";
                 std::cout.flush();
                 std::cout << "Give a name for your run: ";
@@ -118,7 +118,7 @@ int main() {
             } else { break; }
         }
 
-        str.append(";");
+        str.append(";");  // adds ; procedural to the end of each string
         for(std::string s: names) {
             str.append(s);
             str.append(";");
