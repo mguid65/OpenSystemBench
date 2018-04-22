@@ -5,7 +5,7 @@
 void submitResult(std::string str) {
     TCPClient tcp;
 
-    if(tcp.setup("72.219.21.177", 47002) != true ) {
+    if(tcp.setup("72.219.21.177", 47002) != true ) {    //checks if open connection was succesful
         std::cout << "\nFailure: Unable to Connect to Server\n";
         std::cout.flush();
     }
