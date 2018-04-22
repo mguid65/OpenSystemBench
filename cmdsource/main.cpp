@@ -30,7 +30,7 @@ void submitResult(std::string str) {
     }
 }
 
-double convertTimeToScore(double time) {
+double convertTimeToScore(double time) { // takes lowerisbetter time to higherisbetter score
     return (.001/time)*10000000;
 }
 
