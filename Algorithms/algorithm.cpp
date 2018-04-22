@@ -13,9 +13,9 @@ void Algorithm::runAlgorithm() {
 string Algorithm::getName() {
     return algorithm_->getName();
 }
-double Algorithm::getTime() {
+double Algorithm::getTime() { //calculated at the bottom of each algorithm 
     return cpuTime;
 }
-void Algorithm::setTime(double t) {
+void Algorithm::setTime(double t) { //calculated at the bottom of each algorithm 
     cpuTime = t;
 }
