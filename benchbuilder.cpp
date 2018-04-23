@@ -4,7 +4,12 @@
 #include <QThread>
 #include <QStringList>
 
+/* empty constructor does nothing */
 BenchBuilder::BenchBuilder(){}
+
+/* parameterized constructor takes a config array an instance of a running window to perform operations on
+ * and a thread to run algorithms in
+ */
 BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_) {
     pass = pass_;
     running = running_;
@@ -33,7 +38,7 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_)
         }
     }
 }
-
+/* this method runs all algorithms in the vector algList */
 void BenchBuilder::runBench() {
     QStringList names;
 
@@ -54,12 +59,12 @@ void BenchBuilder::runBench() {
     }
     //the next few lines are only for user experience
     emit pass->signalText(QString::fromStdString("Preparing Results..."));
-    //give a status update and wait so a user can read it before jumping to results window
+    //give a status update and wait 4 seconds so a user can read it before jumping to results window
     std::this_thread::sleep_for(std::chrono::milliseconds(4000));
 
     emit pass->finished(names);
 }
-
+/* if standard option in config just create a vector with all available algorithms */
 void BenchBuilder::createStandardBench() {
     algList.push_back(new NBody());
     algList.push_back(new PiDigits());

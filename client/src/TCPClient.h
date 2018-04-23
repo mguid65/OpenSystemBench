@@ -13,7 +13,9 @@
 #include <netdb.h>
 #include <netdb.h> 
 #include <vector>
-
+/*
+ * This is a tcp client implementation from kashimAstro on github
+ */
 using namespace std;
 
 class TCPClient
