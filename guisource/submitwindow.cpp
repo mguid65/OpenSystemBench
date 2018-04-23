@@ -35,29 +35,27 @@ void SubmitWindow::on_submitButton_clicked()
 
         TCPClient tcp;
         if(tcp.setup("72.219.21.177", 47002) != true ) {
+            QString fail = "Connection Failure";
+            ui->responseLabel->setText(fail);
             this->close();
         }
 
         srand(time(NULL));
-        std::cout << name;
+        //std::cout << name;
         tcp.Send(name);
 
         string rec = tcp.receive();
 
         if( rec != "" )
         {
-            //std::cout << "Server Response:" << rec;
-            //std::cout.flush();
             tcp.exit();
             this->close();
         }
         else {
-            //std::cout << "Failure!";
-            //std::cout.flush();
             tcp.exit();
-            QString fail = "Failure!";
+            QString empty = "Empty Response";
 
-            ui->responseLabel->setText(fail);
+            ui->responseLabel->setText(empty);
         }
     }
 }

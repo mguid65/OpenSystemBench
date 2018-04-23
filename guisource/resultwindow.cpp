@@ -155,7 +155,7 @@ void ResultWindow::on_save_result_button_clicked()
 
 void ResultWindow::on_submit_button_clicked()
 {
-    std::cout << standard_flag;
+    //std::cout << standard_flag;
     if(standard_flag) {
         std::string str;
         for(int i = 0; i < names.length(); i++) {
@@ -177,7 +177,7 @@ void ResultWindow::on_submit_button_clicked()
 
         SubmitWindow submitWindow(str);
         submitWindow.exec();
-        std::cout << str;
+        //std::cout << str;
     }
     else {
         NotStandardError notStandardDialog;
