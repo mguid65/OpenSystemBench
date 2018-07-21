@@ -3,6 +3,8 @@
 #include <sstream>
 #include <QThread>
 #include <QStringList>
+#include <chrono>
+#include <thread>
 
 /* empty constructor does nothing */
 BenchBuilder::BenchBuilder(){}

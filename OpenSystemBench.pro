@@ -12,6 +12,10 @@ TEMPLATE = app
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
+DESTDIR = bin
+OBJECTS_DIR = ../OpenSystemBench/.build
+MOC_DIR = ../OpenSystemBench/.build
+
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
@@ -47,7 +51,8 @@ HEADERS += \
     Algorithms/headers/abstract.h \
     headers/submitwindow.h \
     headers/notstandarderror.h \
-    client/src/TCPClient.h
+    client/src/TCPClient.h \
+    headers/logger.h
 FORMS += \
         guistructure/configwindow.ui \
     guistructure/runningwindow.ui \
@@ -63,4 +68,4 @@ LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp -lgomp
 
 CONFIG      += static
 
-QMAKE_CXXFLAGS += -fopenmp
+QMAKE_CXXFLAGS += -fopenmp -static -std=c++11
