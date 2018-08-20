@@ -1,0 +1,9 @@
+moc*
+.build
+bin
+ui*
+*.stash
+OpenSystemBench
+OpenSystemBench.pro.user
+opensystembench_plugin_import.cpp
+*.o
