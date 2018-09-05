@@ -20,13 +20,13 @@ MOC_DIR = ../OpenSystemBench/.build
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        main.cpp \
-        guisource/configwindow.cpp \
+    main.cpp \
+    guisource/configwindow.cpp \
     guisource/runningwindow.cpp \
     guisource/resultwindow.cpp \
     Algorithms/algorithm.cpp \
     Algorithms/nbody.cpp \
-    benchbuilder.cpp \
+    guisource/benchbuilder.cpp \
     guisource/runninglog.cpp \
     guisource/thread.cpp \
     guisource/nooptionsselected.cpp \
@@ -37,32 +37,36 @@ SOURCES += \
     guisource/submitwindow.cpp \
     guisource/notstandarderror.cpp \
     client/src/TCPClient.cpp \
+    guisource/genericdialog.cpp
 
 HEADERS += \
-        headers/configwindow.h \
+    headers/configwindow.h \
     headers/runninglog.h \
     headers/runningwindow.h \
     headers/resultwindow.h \
     Algorithms/headers/algorithm.h \
     Algorithms/headers/algorithminterface.h \
-    benchbuilder.h \
+    headers/benchbuilder.h \
     headers/thread.h \
     headers/nooptionsselected.h \
     Algorithms/headers/abstract.h \
     headers/submitwindow.h \
     headers/notstandarderror.h \
     client/src/TCPClient.h \
-    headers/logger.h
+    headers/logger.h \
+    headers/genericdialog.h
+
 FORMS += \
-        guistructure/configwindow.ui \
+    guistructure/configwindow.ui \
     guistructure/runningwindow.ui \
     guistructure/resultwindow.ui \
     guistructure/nooptionsselected.ui \
     guistructure/submitwindow.ui \
-    guistructure/notstandarderror.ui
+    guistructure/notstandarderror.ui \
+    guistructure/genericdialog.ui
 
 INCLUDEPATH += \
-        headers/
+    headers/
 
 LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp -lgomp
 

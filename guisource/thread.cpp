@@ -1,5 +1,5 @@
 #include "headers/thread.h"
-#include "benchbuilder.h"
+#include "headers/benchbuilder.h"
 
 /* Implementation of the thread class which overrides QThread */
 Thread::Thread(bool * config, RunningWindow * runningWindow){

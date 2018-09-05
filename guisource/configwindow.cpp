@@ -134,6 +134,7 @@ void ConfigWindow::on_stan_radio_toggled()
     ui->single->setEnabled(false);
     ui->multi->setEnabled(false);
     ui->spectral->setEnabled(false);
+    ui->binarytrees->setEnabled(false);
 }
 
 

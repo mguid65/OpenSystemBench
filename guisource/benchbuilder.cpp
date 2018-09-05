@@ -1,4 +1,4 @@
-#include "benchbuilder.h"
+#include "headers/benchbuilder.h"
 #include <string>
 #include <sstream>
 #include <QThread>
