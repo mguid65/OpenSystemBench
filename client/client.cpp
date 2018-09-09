@@ -15,7 +15,7 @@ int Client::sendResult()
 {
 	signal(SIGINT, sig_exit);
 
-	tcp.setup("72.219.21.177",47002);
+	tcp.setup();
 	while(1)
 	{
 		srand(time(NULL));
