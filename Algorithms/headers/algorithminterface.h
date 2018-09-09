@@ -1,6 +1,9 @@
 //Abstract Algorithm Strategy
 //Matthew Guidry March 2018
 //
+#ifndef ALGORITHMINTERFACE_H
+#define ALGORITHMINTERFACE_H
+
 #include <string>
 using namespace std;
 
@@ -10,3 +13,5 @@ class AlgorithmInterface {
         virtual double runAlgorithm() = 0;
 
 };
+
+#endif /* ALGORITHMINTERFACE_H */

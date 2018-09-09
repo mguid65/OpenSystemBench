@@ -15,7 +15,12 @@ genericDialog::~genericDialog()
     delete ui;
 }
 
+void genericDialog::quit()
+{
+    this->close();
+}
+
 void genericDialog::on_ph_ok_clicked()
 {
-
+    quit();
 }

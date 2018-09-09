@@ -20,9 +20,9 @@ bool TCPClient::setup(string address , int port)
 		sock = socket(AF_INET , SOCK_STREAM , 0);
 		if (sock == -1)
 		{
-      			cout << "Could not create socket" << endl;
-    		}
+            cout << "Could not create socket" << endl;
         }
+    }
   	if(inet_addr(address.c_str()) == -1)
   	{
     		struct hostent *he;

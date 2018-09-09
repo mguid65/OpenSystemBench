@@ -12,9 +12,10 @@ TEMPLATE = app
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-DESTDIR = bin
+DESTDIR = ../OpenSystemBench/bin
 OBJECTS_DIR = ../OpenSystemBench/.build
 MOC_DIR = ../OpenSystemBench/.build
+UI_DIR = ../OpenSystemBench/.build
 
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
@@ -68,8 +69,8 @@ FORMS += \
 INCLUDEPATH += \
     headers/
 
-LIBS        += -L$$GMP_PREFIX/lib -lgmpxx -lgmp -lgomp
+LIBS        += -L$$GMP_PREFIX/lib -lgomp
 
 CONFIG      += static
 
-QMAKE_CXXFLAGS += -fopenmp -static -std=c++11
+QMAKE_CXXFLAGS += -fopenmp -static -std=c++14

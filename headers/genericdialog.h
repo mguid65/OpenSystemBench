@@ -16,7 +16,7 @@ public:
     ~genericDialog();
 
 private slots:
-
+    void quit();
     void on_ph_ok_clicked();
 
 private:

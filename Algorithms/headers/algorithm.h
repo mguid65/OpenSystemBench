@@ -1,6 +1,9 @@
 //Header for Algorithm strategy
 //Matthew Guidry March 2018
 //
+#ifndef ALGORITHM_H
+#define ALGORITHM_H
+
 #include "abstract.h"
 
 class Algorithm;
@@ -17,3 +20,5 @@ class Algorithm {
         double cpuTime;
         void setTime(double t);
 };
+
+#endif /* ALGORITHM_H */

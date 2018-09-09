@@ -1,6 +1,9 @@
 //Header for Concrete Algorithm Strategies
 //Matthew Guidry March 2018
 //
+#ifndef ABSTRACT_H
+#define ABSTRACT_H
+
 #include "algorithminterface.h"
 
 class NBody: public AlgorithmInterface {
@@ -37,3 +40,5 @@ class BinaryTrees: public AlgorithmInterface {
         std::string getName();
         double runAlgorithm();
 };
+
+#endif /*ABSTRACT_H*/
