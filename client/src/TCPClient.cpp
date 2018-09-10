@@ -8,17 +8,24 @@
 
 TCPClient::TCPClient()
 {
-	sock = -1;
-	port = 0;
+    sock = -1;
+    port = 0;
 	address = "";
 }
 
 bool TCPClient::setup(string address , int port)
 {
+
+    if (WSAStartup(MAKEWORD(2, 0),
+      &wsaData) != 0)
+    {
+      fprintf(stderr,"WSAStartup() failed");
+      exit();
+    }
   	if(sock == -1)
 	{
-		sock = socket(AF_INET , SOCK_STREAM , 0);
-		if (sock == -1)
+        sock = socket(AF_INET , SOCK_STREAM , IPPROTO_TCP);
+        if (sock == INVALID_SOCKET)
 		{
             cout << "Could not create socket" << endl;
         }
@@ -29,8 +36,7 @@ bool TCPClient::setup(string address , int port)
     		struct in_addr **addr_list;
     		if ( (he = gethostbyname( address.c_str() ) ) == NULL)
     		{
-		      herror("gethostbyname");
-      		      cout<<"Failed to resolve hostname\n";
+              cout<<"Failed to resolve hostname\n";
 		      return false;
     		}
 	   	addr_list = (struct in_addr **) he->h_addr_list;
@@ -45,7 +51,7 @@ bool TCPClient::setup(string address , int port)
     		server.sin_addr.s_addr = inet_addr( address.c_str() );
   	}
   	server.sin_family = AF_INET;
-  	server.sin_port = htons( port );
+    server.sin_port = htons( port );
   	if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
   	{
     		perror("connect failed. Error");
@@ -56,7 +62,7 @@ bool TCPClient::setup(string address , int port)
 
 bool TCPClient::Send(string data)
 {
-	if(sock != -1) 
+    if(sock != INVALID_SOCKET)
 	{
 		if( send(sock , data.c_str() , strlen( data.c_str() ) , 0) < 0)
 		{
@@ -102,5 +108,5 @@ string TCPClient::read()
 
 void TCPClient::exit()
 {
-    close( sock );
+    closesocket( sock );
 }

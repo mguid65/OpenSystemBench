@@ -67,10 +67,11 @@ FORMS += \
     guistructure/genericdialog.ui
 
 INCLUDEPATH += \
-    headers/
+    headers/ \
+    ../boost/
 
-LIBS        += -L$$GMP_PREFIX/lib -lgomp
+LIBS        += -L$$GMP_PREFIX/lib -lgomp -lws2_32
 
 CONFIG      += static
 
-QMAKE_CXXFLAGS += -fopenmp -static -std=c++14
+QMAKE_CXXFLAGS += -fopenmp -static -std=c++14 -march=nehalem
