@@ -26,7 +26,7 @@ double PiDigits::runAlgorithm() {
 
     auto begin = std::chrono::high_resolution_clock::now();
 
-    volatile double result = pi_digits(500000000);
+    volatile double result = pi_digits(1000000000);
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
