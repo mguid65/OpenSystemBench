@@ -11,7 +11,7 @@ class AlgorithmInterface {
     public:
         virtual string getName() = 0;
         virtual double runAlgorithm() = 0;
-
+        virtual ~AlgorithmInterface(){}
 };
 
 #endif /* ALGORITHMINTERFACE_H */

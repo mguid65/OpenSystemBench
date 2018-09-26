@@ -34,7 +34,7 @@ bool TCPClient::setup(string address , int port)
 		      return false;
     		}
 	   	addr_list = (struct in_addr **) he->h_addr_list;
-    		for(int i = 0; addr_list[i] != NULL; i++)
+            for(int i = 0; addr_list[i] != nullptr; i++)
     		{
       		      server.sin_addr = *addr_list[i];
 		      break;

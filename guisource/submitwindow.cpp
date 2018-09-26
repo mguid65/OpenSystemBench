@@ -45,7 +45,7 @@ void SubmitWindow::on_submitButton_clicked()
             this->close();
         }
 
-        srand(time(NULL));
+        srand(time(nullptr));
 
         //send the string
         tcp.Send(name);

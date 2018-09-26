@@ -12,10 +12,10 @@
 #define SCALE 10000
 #define ARRINIT 2000
 
-double pi_digits(long digits) {
+double pi_digits(long long digits) {
     double sum = 0.0;
     int sign = 1;
-    for (long i = 0; i < digits; ++i) {
+    for (long long i = 0; i < digits; ++i) {
         sum += sign/(2.0*i+1.0);
         sign *= -1;
     }
@@ -26,7 +26,7 @@ double PiDigits::runAlgorithm() {
 
     auto begin = std::chrono::high_resolution_clock::now();
 
-    volatile double result = pi_digits(5000000000);
+    volatile double result = pi_digits(1000000000);
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();

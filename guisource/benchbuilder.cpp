@@ -47,7 +47,7 @@ void BenchBuilder::runBench() {
     for (Algorithm &alg : algList ) {
         string name = alg.getName();
         QString qname = QString::fromStdString(name);
-        names<<qname;
+        names << qname;
         emit pass->signalText(qname);
 
         alg.runAlgorithm();
@@ -60,9 +60,7 @@ void BenchBuilder::runBench() {
         emit pass->signalResult(time_);
     }
     //the next few lines are only for user experience
-    emit pass->signalText(QString::fromStdString("Preparing Results..."));
-    //give a status update and wait 4 seconds so a user can read it before jumping to results window
-    std::this_thread::sleep_for(std::chrono::milliseconds(4000));
+    emit pass->signalText(QString::fromStdString("Finished!"));
 
     emit pass->finished(names);
 }

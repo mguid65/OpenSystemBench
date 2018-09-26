@@ -11,6 +11,7 @@ class NBody: public AlgorithmInterface {
         NBody();
         std::string getName();
         double runAlgorithm();
+        ~NBody(){}
 };
 
 class PiDigits: public AlgorithmInterface {
@@ -18,6 +19,7 @@ class PiDigits: public AlgorithmInterface {
         PiDigits();
         std::string getName();
         double runAlgorithm();
+        ~PiDigits(){}
 };
 
 class Mandelbrot: public AlgorithmInterface {
@@ -25,6 +27,7 @@ class Mandelbrot: public AlgorithmInterface {
         Mandelbrot();
         std::string getName();
         double runAlgorithm();
+        ~Mandelbrot(){}
 };
 
 class SpectralNorm: public AlgorithmInterface {
@@ -32,6 +35,7 @@ class SpectralNorm: public AlgorithmInterface {
         SpectralNorm();
         std::string getName();
         double runAlgorithm();
+        ~SpectralNorm(){}
 };
 
 class BinaryTrees: public AlgorithmInterface {
@@ -39,6 +43,7 @@ class BinaryTrees: public AlgorithmInterface {
         BinaryTrees();
         std::string getName();
         double runAlgorithm();
+        ~BinaryTrees(){}
 };
 
 #endif /*ABSTRACT_H*/
