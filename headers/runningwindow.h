@@ -24,6 +24,7 @@ private:
     bool standard_flag;
     QStringList names_;
 public slots:
+    void updateCPUInfo(const QString& text);
     void updateText(const QString& text);
     void handleResult(double result);
     void handleFinished(QStringList names);

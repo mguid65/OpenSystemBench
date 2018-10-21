@@ -16,6 +16,7 @@ signals:
     void finished(QStringList);
     void signalResult(double);
     void signalText(QString);
+    void signalCPUText(QString);
 
 protected:
     virtual void run();

@@ -6,6 +6,7 @@ class BenchBuilder {
     public:
         BenchBuilder();
         BenchBuilder(bool *config_, RunningWindow* running_, Thread * pass);
+        void getCpuInfo();
         void runBench();
         void createStandardBench();
         std::vector <Algorithm> algList;

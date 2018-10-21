@@ -32,12 +32,15 @@ void ConfigWindow::createRunWindow(bool *config_)
     worker->moveToThread(thread);
 
     connect(worker, SIGNAL(signalText(QString)), runningWindow, SLOT(updateText(QString)));
+    connect(worker, SIGNAL(signalCPUText(QString)), runningWindow, SLOT(updateCPUInfo(QString)));
     connect(worker, SIGNAL(signalResult(double)), runningWindow, SLOT(handleResult(double)));
     connect(worker, SIGNAL(finished(QStringList)), runningWindow, SLOT(handleFinished(QStringList)));
 
     worker->start();
 
     runningWindow->updateText(QString::fromStdString("Running..."));
+    runningWindow->updateCPUInfo(QString::fromStdString("CPU Info:"));
+
     quit();
 }
 

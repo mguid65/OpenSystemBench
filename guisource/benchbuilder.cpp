@@ -1,4 +1,5 @@
 #include "headers/benchbuilder.h"
+#include "sysinfo/cpuinfo.h"
 #include <string>
 #include <sstream>
 #include <QThread>
@@ -40,6 +41,29 @@ BenchBuilder::BenchBuilder(bool *config_, RunningWindow *running_,Thread *pass_)
         }
     }
 }
+/* this method updates cpuinfo */
+void BenchBuilder::getCpuInfo(){
+  CPUInfo cpu;
+  QString qvendor = QString::fromStdString(cpu.vendor());
+  emit pass->signalCPUText(qvendor);
+  QString qmodel = QString::fromStdString(cpu.model());
+  emit pass->signalCPUText(qmodel);
+  QString qspeed = QString::fromStdString(cpu.speed());
+  emit pass->signalCPUText(qspeed);
+  QString qfreq = QString::fromStdString(cpu.frequencies());
+  emit pass->signalCPUText(qfreq);
+  QString qthread = QString::fromStdString(cpu.threads());
+  emit pass->signalCPUText(qthread);
+  QString qbyte = QString::fromStdString(cpu.byte_ordering());
+  emit pass->signalCPUText(qbyte);
+  QString qphys = QString::fromStdString(cpu.physical_mem());
+  emit pass->signalCPUText(qphys);
+  QString qvir = QString::fromStdString(cpu.virtual_mem());
+  emit pass->signalCPUText(qvir);
+  QString qswap = QString::fromStdString(cpu.swap_mem());
+  emit pass->signalCPUText(qswap);
+}
+
 /* this method runs all algorithms in the vector algList */
 void BenchBuilder::runBench() {
     QStringList names;

@@ -10,5 +10,6 @@ Thread::Thread(bool * config, RunningWindow * runningWindow){
 Thread::~Thread(){}
 void Thread::run() {
     BenchBuilder b(config, runningWindow, this);
+    b.getCpuInfo();
     b.runBench();
 }

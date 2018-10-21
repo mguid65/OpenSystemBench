@@ -19,6 +19,10 @@ RunningWindow::~RunningWindow()
 {
     delete ui;
 }
+/* function to update text in cpu log */
+void RunningWindow::updateCPUInfo(const QString& text){
+    ui->cpuinfo_viewer->textUpdate(text);
+}
 /* function to update the text in the running log*/
 void RunningWindow::updateText(const QString& text) {
     ui->run_status_viewer->textUpdate(text);
