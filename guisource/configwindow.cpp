@@ -78,7 +78,7 @@ void ConfigWindow::on_run_button_clicked()
 {
     standard_flag = ui->stan_radio->isChecked();
     //remove this array and make a map
-    bool config [9] = { false, false, false, false, false, false, false, false, false };
+    bool config [9] { false, false, false, false, false, false, false, false, false };
     //standard test
     if(ui->stan_radio->isChecked()) {
         config[0] = true;

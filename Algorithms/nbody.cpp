@@ -221,7 +221,7 @@ double NBody::runAlgorithm() {
   //nprintf("%.9f\n", bodies.energy());
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
-    return duration / 1E9;
+    return duration;
 }
 string NBody::getName() {
     return "NBody";

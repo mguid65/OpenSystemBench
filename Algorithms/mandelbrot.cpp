@@ -127,7 +127,7 @@ double Mandelbrot::runAlgorithm()
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
-    return duration / 1E9;
+    return duration;
 }
 
 string Mandelbrot::getName() {

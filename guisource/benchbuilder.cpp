@@ -1,10 +1,10 @@
 #include "headers/benchbuilder.h"
 #include <string>
 #include <sstream>
-#include <QThread>
-#include <QStringList>
 #include <chrono>
 #include <thread>
+#include <QThread>
+#include <QStringList>
 
 /* empty constructor does nothing */
 BenchBuilder::BenchBuilder(){}
@@ -54,14 +54,14 @@ void BenchBuilder::runBench() {
 
         double time_ = alg.getTime();
 
-        string strtime = to_string(time_);
+        string strtime = to_string(time_/1E9);
         emit pass->signalText(QString::fromStdString(strtime));
 
         emit pass->signalResult(time_);
     }
     //the next few lines are only for user experience
     emit pass->signalText(QString::fromStdString("Finished!"));
-
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     emit pass->finished(names);
 }
 /* if standard option in config just create a vector with all available algorithms */

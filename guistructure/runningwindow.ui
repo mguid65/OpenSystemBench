@@ -52,22 +52,6 @@
      <string>Quit</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="cont_button">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>180</x>
-      <y>190</y>
-      <width>89</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Continue</string>
-    </property>
-   </widget>
   </widget>
  </widget>
  <customwidgets>

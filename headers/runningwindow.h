@@ -30,8 +30,6 @@ public slots:
 private slots:
     void on_quit_button2_clicked();
     void quit();
-
-    void on_cont_button_clicked();
 };
 
 #endif // RUNNINGWINDOW_H

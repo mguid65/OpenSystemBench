@@ -28,6 +28,7 @@ ResultWindow::~ResultWindow()
 }
 /* method to convert time to score */
 double ResultWindow::convertTimeToScore(double time) {
+    time/= 1E9;
     totalTime +=time;
     double score = (.001/time)*10000000;
     totalScore +=score;
@@ -73,7 +74,7 @@ void ResultWindow::displayResults() {
             newScore = new QTableWidgetItem;
             ui->result_table->setItem(row,2,newScore);
         }
-        newItem->setData(Qt::DisplayRole, QVariant(results[i]));
+        newItem->setData(Qt::DisplayRole, QVariant(results[i]/1E9));
         newItem->setFlags(newItem->flags() ^ Qt::ItemIsEditable);
         newItem->setTextAlignment( Qt::AlignCenter);
 

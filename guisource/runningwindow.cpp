@@ -39,11 +39,6 @@ void RunningWindow::handleResult(double result){
 /*handle finished by closing the running window and creating a result window */
 void RunningWindow::handleFinished(QStringList names) {
     names_ = names;
-    this->ui->cont_button->setEnabled(true);
-}
-
-void RunningWindow::on_cont_button_clicked()
-{
     this->close();
     resultWindow = new ResultWindow(standard_flag, ocflag,results, names_, nullptr);
     resultWindow->show();
