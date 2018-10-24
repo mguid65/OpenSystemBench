@@ -71,7 +71,7 @@ FORMS += \
 INCLUDEPATH += \
     headers/
 
-LIBS        += -L$$GMP_PREFIX/lib -lgomp
+LIBS        += -L$$GMP_PREFIX/lib -lgomp -lcurl
 
 CONFIG      += static
 

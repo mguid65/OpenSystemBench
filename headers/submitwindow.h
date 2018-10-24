@@ -12,7 +12,7 @@ class SubmitWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit SubmitWindow(std::string str,QWidget *parent = 0);
+    explicit SubmitWindow(std::string json_str, QWidget *parent = nullptr);
     ~SubmitWindow();
 
 private slots:
@@ -22,7 +22,7 @@ private slots:
 
 private:
     Ui::SubmitWindow *ui;
-    std::string str;
+    std::string json_str;
 };
 
 #endif // SUBMITWINDOW_H
