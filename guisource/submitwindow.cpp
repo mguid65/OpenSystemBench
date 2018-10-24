@@ -34,7 +34,7 @@ void SubmitWindow::on_submitButton_clicked() {
   curl_global_init(CURL_GLOBAL_DEFAULT);
   curl = curl_easy_init();
   if(curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, "https://opensystembench.com");
+    curl_easy_setopt(curl, CURLOPT_URL, "https://opensystembench.com/submit");
 #ifdef SKIP_PEER_VERIFICATION
     /*
      * If you want to connect to a site who isn't using a certificate that is
@@ -60,13 +60,14 @@ void SubmitWindow::on_submitButton_clicked() {
 #endif
     curl_easy_setopt(curl, CURLOPT_USERNAME, ui->username_val->text().toStdString().c_str());
     curl_easy_setopt(curl, CURLOPT_PASSWORD, ui->password_val->text().toStdString().c_str());
-    curl_easy_setopt(curl, CURLOPT);
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_str.c_str());
+    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, -1L);
+    //curl_easy_setopt(curl, CURLOPT_AB);
     /* Perform the request, res will get the return code */
     res = curl_easy_perform(curl);
     /* Check for errors */
     if(res != CURLE_OK)
-      fprintf(stderr, "curl_easy_perform() failed: %s\n",
-              curl_easy_strerror(res));
+      ui->responseLabel->setText("HTTPS Post Request failed: " + QString(curl_easy_strerror(res)) + '\n');
 
     /* always cleanup */
     curl_easy_cleanup(curl);
@@ -116,4 +117,5 @@ void SubmitWindow::on_submitButton_clicked() {
         }
     }
     */
+    this->close();
 }

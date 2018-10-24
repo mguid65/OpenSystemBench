@@ -51,13 +51,13 @@ class CPUInfo {
     const string swap_mem();
 
   private:
-    string m_vendor_id{"Vendor: "};
-    string m_model_name{"Model: "};
-    string m_clock_speed{"Speed: "};
-    string m_byte_order{"Byte Order: "};
-    string m_frequencies{"Frequencies: "};
-    string m_num_threads{"Threads: "};
-    string m_physical_mem{"Physical Mem: "};
-    string m_virtual_mem{"Virtual Mem: "};
-    string m_swap_mem{"Swap Mem: "};
+    string m_vendor_id{""};
+    string m_model_name{""};
+    string m_clock_speed{""};
+    string m_byte_order{""};
+    string m_frequencies{""};
+    string m_num_threads{""};
+    string m_physical_mem{""};
+    string m_virtual_mem{""};
+    string m_swap_mem{""};
 };

@@ -114,50 +114,64 @@
      <rect>
       <x>380</x>
       <y>20</y>
-      <width>101</width>
-      <height>191</height>
+      <width>102</width>
+      <height>281</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="labels">
-     <item row="1" column="0">
-      <widget class="QLabel" name="vendor">
-       <property name="text">
-        <string>Vendor: </string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="thread">
-       <property name="text">
-        <string>Threads:</string>
-       </property>
-      </widget>
-     </item>
      <item row="8" column="0">
-      <widget class="QLabel" name="virt_mem">
-       <property name="text">
-        <string>Virtual Mem:</string>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="byte_order">
-       <property name="text">
-        <string>Byte Order:</string>
+     <item row="10" column="0">
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
      <item row="2" column="0">
-      <widget class="QLabel" name="model">
+      <widget class="QLabel" name="vendor">
        <property name="text">
-        <string>Model: </string>
+        <string>  Vendor: </string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="thread">
+       <property name="text">
+        <string>  Threads:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="virt_mem">
+       <property name="text">
+        <string>  Virtual Mem:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="byte_order">
+       <property name="text">
+        <string>  Byte Order:</string>
        </property>
       </widget>
      </item>
      <item row="3" column="0">
+      <widget class="QLabel" name="model">
+       <property name="text">
+        <string>  Model: </string>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
       <widget class="QLabel" name="speed">
        <property name="text">
-        <string>Speed: </string>
+        <string>  Speed: </string>
        </property>
       </widget>
      </item>
@@ -168,24 +182,38 @@
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="freq">
        <property name="text">
-        <string>Frequency:</string>
+        <string>  Frequency:</string>
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="11" column="0">
       <widget class="QLabel" name="phy_mem">
        <property name="text">
-        <string>Physical Mem:</string>
+        <string>  Phys. Mem:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="swap_mem">
+       <property name="text">
+        <string>  Swap Mem:</string>
        </property>
       </widget>
      </item>
      <item row="9" column="0">
-      <widget class="QLabel" name="swap_mem">
+      <widget class="QLabel" name="mem_info">
        <property name="text">
-        <string>Swap Mem:</string>
+        <string>Memory Info</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="Line" name="line_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>
@@ -197,67 +225,74 @@
       <x>480</x>
       <y>20</y>
       <width>251</width>
-      <height>191</height>
+      <height>281</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="values">
-     <item row="1" column="0">
+     <item row="8" column="0">
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
       <widget class="QLabel" name="vendor_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="4" column="0">
+     <item row="5" column="0">
       <widget class="QLabel" name="freq_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="speed_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="2" column="0">
+     <item row="3" column="0">
       <widget class="QLabel" name="model_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="7" column="0">
+     <item row="11" column="0">
       <widget class="QLabel" name="phy_mem_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="6" column="0">
+     <item row="7" column="0">
       <widget class="QLabel" name="byte_order_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="5" column="0">
+     <item row="6" column="0">
       <widget class="QLabel" name="thread_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="8" column="0">
+     <item row="12" column="0">
       <widget class="QLabel" name="virt_mem_val">
        <property name="text">
         <string/>
        </property>
       </widget>
      </item>
-     <item row="9" column="0">
+     <item row="13" column="0">
       <widget class="QLabel" name="swap_mem_val">
        <property name="text">
         <string/>
@@ -268,6 +303,27 @@
       <widget class="QLabel" name="dummy">
        <property name="text">
         <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="0">
+      <widget class="Line" name="line_4">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="dummy2">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="Line" name="line_6">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
        </property>
       </widget>
      </item>

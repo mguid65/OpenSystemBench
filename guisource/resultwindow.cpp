@@ -126,25 +126,15 @@ void ResultWindow::displayResults() {
 void ResultWindow::getCpuInfo() {
   CPUInfo cpu;
 
-  QString qvendor = QString::fromStdString(cpu.vendor());
-  QString qmodel = QString::fromStdString(cpu.model());
-  QString qspeed = QString::fromStdString(cpu.speed());
-  QString qfreq = QString::fromStdString(cpu.frequencies());
-  QString qthread = QString::fromStdString(cpu.threads());
-  QString qbyte = QString::fromStdString(cpu.byte_ordering());
-  QString qphys = QString::fromStdString(cpu.physical_mem());
-  QString qvir = QString::fromStdString(cpu.virtual_mem());
-  QString qswap = QString::fromStdString(cpu.swap_mem());
-
-  ui->vendor_val->setText(qvendor);
-  ui->model_val->setText(qmodel);
-  ui->speed_val->setText(qspeed);
-  ui->freq_val->setText(qfreq);
-  ui->thread_val->setText(qthread);
-  ui->byte_order_val->setText(qbyte);
-  ui->phy_mem_val->setText(qphys);
-  ui->virt_mem_val->setText(qvir);
-  ui->swap_mem_val->setText(qswap);
+  ui->vendor_val->setText(QString::fromStdString(cpu.vendor()));
+  ui->model_val->setText(QString::fromStdString(cpu.model()));
+  ui->speed_val->setText(QString::fromStdString(cpu.speed()));
+  ui->freq_val->setText(QString::fromStdString(cpu.frequencies()));
+  ui->thread_val->setText(QString::fromStdString(cpu.threads()));
+  ui->byte_order_val->setText(QString::fromStdString(cpu.byte_ordering()));
+  ui->phy_mem_val->setText(QString::fromStdString(cpu.physical_mem()));
+  ui->virt_mem_val->setText(QString::fromStdString(cpu.virtual_mem()));
+  ui->swap_mem_val->setText(QString::fromStdString(cpu.swap_mem()));
 }
 
 
@@ -194,22 +184,21 @@ void ResultWindow::on_submit_button_clicked()
 {
     if(standard_flag) {
         //start json string manually
-        std::string json_str = "{ \"result\" : { ";
+        std::string json_str = "{ ";
 
         for(int i = 0; i < names.length(); i++) {
-            json_str.append("{\" " + names[i].toLocal8Bit() + "\" : ");
-            json_str.append("{ \"Time\" : ");
-            json_str.append(std::to_string(results[static_cast<unsigned long>(i)]) + "\", ");
-            json_str.append("\"Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + "\" } }, ");
+            json_str.append("\"" + names[i].toLocal8Bit() + "Time\" : ");
+            json_str.append(std::to_string(results[static_cast<unsigned long>(i)]) + ", ");
+            json_str.append("\"" + names[i].toLocal8Bit() + "Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + ", ");
         }
 
-        json_str.append("\"totalTime\" : \"" + std::to_string(totalTime) + "\", ");
-        json_str.append("\"totalScore\" : \"" + std::to_string(totalScore) + "\", ");
+        json_str.append("\"totalTime\" : " + std::to_string(totalTime) + ", ");
+        json_str.append("\"totalScore\" : " + std::to_string(totalScore) + ", ");
 
         if(ocflag)
-          json_str.append("\"overclocked\" : true } }");
+          json_str.append("\"overclocked\" : true }");
         else
-          json_str.append("\"overclocked\" : false } }");
+          json_str.append("\"overclocked\" : false }");
         std::cout << json_str << '\n';
 
         SubmitWindow submitWindow(json_str);
