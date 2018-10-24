@@ -13,9 +13,10 @@ class ResultWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit ResultWindow(bool standard_flag, bool ocflag, std::vector<double> results, const QStringList& names, QWidget *parent = 0 );
+    explicit ResultWindow(bool standard_flag, bool ocflag, std::vector<double> results, const QStringList& names, QWidget *parent = nullptr );
     ~ResultWindow();
     void displayResults();
+    void getCpuInfo();
 
 private slots:
     void on_quit_button_clicked();

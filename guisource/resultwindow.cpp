@@ -2,7 +2,10 @@
 #include "headers/configwindow.h"
 #include "headers/submitwindow.h"
 #include "headers/notstandarderror.h"
+#include "sysinfo/cpuinfo.h"
+
 #include "ui_resultwindow.h"
+
 #include <QString>
 #include <iostream>
 #include <QVariant>
@@ -117,7 +120,32 @@ void ResultWindow::displayResults() {
     totScore->setTextAlignment( Qt::AlignCenter);
 
     ui->result_table->resizeColumnsToContents();
+    getCpuInfo();
 }
+
+void ResultWindow::getCpuInfo() {
+  CPUInfo cpu;
+  QString qvendor = QString::fromStdString(cpu.vendor());
+  QString qmodel = QString::fromStdString(cpu.model());
+  QString qspeed = QString::fromStdString(cpu.speed());
+  QString qfreq = QString::fromStdString(cpu.frequencies());
+  QString qthread = QString::fromStdString(cpu.threads());
+  QString qbyte = QString::fromStdString(cpu.byte_ordering());
+  QString qphys = QString::fromStdString(cpu.physical_mem());
+  QString qvir = QString::fromStdString(cpu.virtual_mem());
+  QString qswap = QString::fromStdString(cpu.swap_mem());
+  ui->vendor_val->setText(qvendor);
+  ui->model_val->setText(qmodel);
+  ui->speed_val->setText(qspeed);
+  ui->freq_val->setText(qfreq);
+  ui->thread_val->setText(qthread);
+  ui->byte_order_val->setText(qbyte);
+  ui->phy_mem_val->setText(qphys);
+  ui->virt_mem_val->setText(qvir);
+  ui->swap_mem_val->setText(qswap);
+}
+
+
 /* quit function */
 void ResultWindow::quit() {
     this->close();

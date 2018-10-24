@@ -38,7 +38,8 @@ SOURCES += \
     guisource/submitwindow.cpp \
     guisource/notstandarderror.cpp \
     client/src/TCPClient.cpp \
-    guisource/genericdialog.cpp
+    guisource/genericdialog.cpp \
+    sysinfo/cpuinfo.cpp
 
 HEADERS += \
     headers/configwindow.h \
@@ -55,7 +56,8 @@ HEADERS += \
     headers/notstandarderror.h \
     client/src/TCPClient.h \
     headers/logger.h \
-    headers/genericdialog.h
+    headers/genericdialog.h \
+    sysinfo/cpuinfo.h
 
 FORMS += \
     guistructure/configwindow.ui \
