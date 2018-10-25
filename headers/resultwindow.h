@@ -28,10 +28,16 @@ private slots:
 
 private:
     Ui::ResultWindow *ui;
+
     QStringList names;
+
     std::vector<double> results;
+    std::vector<std::string> sys_info;
+    std::vector<std::string> sys_info_labels {"vendor", "model", "speed", "frequency", "threads",
+                                              "byte_order", "physical_memory", "virtual_memory", "swap"};
     double totalTime = 0;
     double totalScore = 0;
+
     bool ocflag;
     bool standard_flag;
 };

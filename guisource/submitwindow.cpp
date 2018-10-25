@@ -73,49 +73,5 @@ void SubmitWindow::on_submitButton_clicked() {
     curl_easy_cleanup(curl);
   }
   curl_global_cleanup();
-    /*QString qname = ui->nameInput->text();
-    if(qname.length() < 1 || qname.length() > 40) {
-        QString no = "Invalid Name!";
-        ui->responseLabel->setText(no);
-    }
-    else {
-        std::string name = qname.toStdString();
-        //append the str field to the name
-        name.append(";");
-        name.append(str);
-        //create a TCPClient object
-        TCPClient tcp;
-        //this is the server address and port hosting the listener
-        //if setup returns false, connection failed
-        if(tcp.setup("72.219.21.177", 47002) != true ) {
-            QString fail = "Connection Failure";
-            ui->responseLabel->setText(fail);
-            this->close();
-        }
-
-        srand(time(nullptr));
-
-        //send the string
-        tcp.Send(name);
-
-        //recieve server reply
-        string rec = tcp.receive();
-
-        //if reply is not null, exit
-        if( rec != "" )
-        {
-            //this should set status label to upload success and disable the submit button in future
-            tcp.exit();
-            this->close();
-        }
-        else {
-            //if response is empty, set status label
-            tcp.exit();
-            QString empty = "Empty Response";
-
-            ui->responseLabel->setText(empty);
-        }
-    }
-    */
-    this->close();
+  this->close();
 }
