@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt install libcurl4-openssl-dev qt5-default qt5-qmake libgl1-mesa-dev
+sudo apt install libcurl4-openssl-dev qt5-default qt5-qmake libgl1-mesa-dev libgomp1
 
 qmake -config release
 
