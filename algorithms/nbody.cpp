@@ -12,11 +12,13 @@
 #include <cmath>
 #include <cstdlib>
 #include <array>
-#include <immintrin.h>
 #include <chrono>
 #include <thread>
 #include <future>
-#include "../Algorithms/headers/abstract.h"
+
+#include <immintrin.h>
+
+#include "../algorithms/headers/abstract.h"
 
 
 static const double PI = 3.141592653589793;

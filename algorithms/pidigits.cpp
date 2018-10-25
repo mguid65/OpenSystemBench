@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <chrono>
-#include "../Algorithms/headers/abstract.h"
+#include "../algorithms/headers/abstract.h"
 
 #define SCALE 10000
 #define ARRINIT 2000

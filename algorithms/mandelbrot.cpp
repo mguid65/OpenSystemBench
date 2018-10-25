@@ -8,8 +8,7 @@
  */
 
 #include <chrono>
-
-#include "../Algorithms/headers/abstract.h"
+#include "../algorithms/headers/abstract.h"
 // The Computer Language Benchmarks Game
 // https://salsa.debian.org/benchmarksgame-team/benchmarksgame/
 //
