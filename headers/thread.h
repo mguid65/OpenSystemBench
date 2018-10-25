@@ -1,8 +1,10 @@
 #ifndef THREAD_H
 #define THREAD_H
+
 #include <QThread>
 #include <QString>
-#include "Algorithms/headers/algorithm.h"
+
+#include "algorithms/headers/algorithm.h"
 #include "headers/runningwindow.h"
 
 class Thread : public QThread

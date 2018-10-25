@@ -1,6 +1,5 @@
 #include "submitwindow.h"
 #include "ui_submitwindow.h"
-#include "client/src/TCPClient.h"
 #include <curl/curl.h>
 
 /* parameterized constructor grenerated by qt creator

@@ -22,7 +22,7 @@
 #include <cmath>
 #include <omp.h>
 #include <chrono>
-#include "../Algorithms/headers/abstract.h"
+#include "../algorithms/headers/abstract.h"
 
 
 inline int A(int i, int j) {

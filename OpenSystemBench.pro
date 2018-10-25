@@ -1,6 +1,9 @@
 #-------------------------------------------------
 # Project created by QtCreator 2018-02-02T10:49:05
-# Matthew Guidry, Scott Wilder 2018
+# Matthew Guidry, Scott Wilder Jan-May 2018
+#
+# Matthew Guidry, Nam Vu, Mason Walton, Adam Yu,
+# Raphaela Mettig, Benjamin Geiss Aug-Nov 2018
 #-------------------------------------------------
 
 QT       += core gui
@@ -20,43 +23,43 @@ UI_DIR = ../OpenSystemBench/.build
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
+# need to replace all error dialogs with genericdialog
 SOURCES += \
-    main.cpp \
+    guisource/main.cpp \
     guisource/configwindow.cpp \
     guisource/runningwindow.cpp \
     guisource/resultwindow.cpp \
-    Algorithms/algorithm.cpp \
-    Algorithms/nbody.cpp \
     guisource/benchbuilder.cpp \
+    guisource/submitwindow.cpp \
+    guisource/notstandarderror.cpp \
     guisource/runninglog.cpp \
     guisource/thread.cpp \
     guisource/nooptionsselected.cpp \
-    Algorithms/pidigits.cpp \
-    Algorithms/mandelbrot.cpp \
-    Algorithms/spectral-norm.cpp \
-    Algorithms/binarytrees.cpp \
-    guisource/submitwindow.cpp \
-    guisource/notstandarderror.cpp \
-    client/src/TCPClient.cpp \
     guisource/genericdialog.cpp \
+    algorithms/algorithm.cpp \
+    algorithms/nbody.cpp \
+    algorithms/pidigits.cpp \
+    algorithms/mandelbrot.cpp \
+    algorithms/spectral-norm.cpp \
+    algorithms/binarytrees.cpp \
     sysinfo/cpuinfo.cpp
 
+# need to replace all error dialogs with genericdialog
 HEADERS += \
     headers/configwindow.h \
     headers/runninglog.h \
     headers/runningwindow.h \
     headers/resultwindow.h \
-    Algorithms/headers/algorithm.h \
-    Algorithms/headers/algorithminterface.h \
     headers/benchbuilder.h \
     headers/thread.h \
     headers/nooptionsselected.h \
-    Algorithms/headers/abstract.h \
     headers/submitwindow.h \
     headers/notstandarderror.h \
-    client/src/TCPClient.h \
     headers/logger.h \
     headers/genericdialog.h \
+    algorithms/headers/algorithm.h \
+    algorithms/headers/algorithminterface.h \
+    algorithms/headers/abstract.h \
     sysinfo/cpuinfo.h
 
 FORMS += \

@@ -1,4 +1,4 @@
-#include "../Algorithms/headers/algorithm.h"
+#include "../algorithms/headers/algorithm.h"
 #include "../client/src/TCPClient.h"
 #include <iomanip>
 

@@ -11,7 +11,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <chrono>
-#include "../Algorithms/headers/abstract.h"
+#include "../algorithms/headers/abstract.h"
 
 struct Node {
   Node *l, *r;
