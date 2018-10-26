@@ -27,6 +27,11 @@ void SubmitWindow::on_cancelButton_clicked() {
    directly based on example from libcurl
 */
 
+size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp)
+{
+   return size * nmemb;
+}
+
 void SubmitWindow::on_submitButton_clicked() {
   CURL *curl;
   CURLcode res;
@@ -35,6 +40,7 @@ void SubmitWindow::on_submitButton_clicked() {
   curl = curl_easy_init();
   if(curl) {
     curl_easy_setopt(curl, CURLOPT_URL, "https://opensystembench.com/submit");
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
 #ifdef SKIP_PEER_VERIFICATION
     /*
      * If you want to connect to a site who isn't using a certificate that is
@@ -79,8 +85,9 @@ void SubmitWindow::on_submitButton_clicked() {
         curl_global_cleanup();
         this->close();
       } else if (response_code == 521) {
-        ui->responseLabel->setText("512 Web server is down: \n");
+        ui->responseLabel->setText("521 Web server is down: \n");
       }
     }
   }
 }
+
