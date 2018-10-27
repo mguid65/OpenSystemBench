@@ -182,12 +182,12 @@ void ResultWindow::on_save_result_button_clicked()
      char headers[] = "Algorithm,Time,Score,\n";
      f.write(headers);
      for(int i = 0; i < names.length(); ++i) {
-        f.write(ui->result_table->item(i,0)->text().toLocal8Bit());
-        f.write(comma);
-        f.write(ui->result_table->item(i,1)->text().toLocal8Bit());
-        f.write(comma);
-        f.write(ui->result_table->item(i,2)->text().toLocal8Bit());
-        f.write(end);
+      f.write(ui->result_table->item(i,0)->text().toLocal8Bit());
+      f.write(comma);
+      f.write(ui->result_table->item(i,1)->text().toLocal8Bit());
+      f.write(comma);
+      f.write(ui->result_table->item(i,2)->text().toLocal8Bit());
+      f.write(end);
      }
      f.close();
 }
@@ -204,9 +204,9 @@ void ResultWindow::on_submit_button_clicked()
         std::string json_str = "{ ";
 
         for(int i = 0; i < names.length(); i++) {
-            json_str.append("\"" + names[i].toLocal8Bit() + "Time\" : ");
-            json_str.append(std::to_string(results[static_cast<unsigned long>(i)]) + ", ");
-            json_str.append("\"" + names[i].toLocal8Bit() + "Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + ", ");
+          json_str.append("\"" + names[i].toLocal8Bit() + "Time\" : ");
+          json_str.append(std::to_string(results[static_cast<unsigned long>(i)]) + ", ");
+          json_str.append("\"" + names[i].toLocal8Bit() + "Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + ", ");
         }
 
         json_str.append("\"totalTime\" : " + std::to_string(totalTime) + ", ");
@@ -229,7 +229,7 @@ void ResultWindow::on_submit_button_clicked()
         submitWindow.exec();
     }
     else {
-        NotStandardError notStandardDialog;
-        notStandardDialog.exec();
+      NotStandardError notStandardDialog;
+      notStandardDialog.exec();
     }
 }
