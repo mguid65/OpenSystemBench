@@ -141,9 +141,9 @@ void ResultWindow::getCpuInfo() {
   ui->vendor_val->setText(QString::fromStdString(cpu.vendor()));
   ui->model_val->setText(QString::fromStdString(cpu.model()));
   ui->speed_val->setText(QString::fromStdString(cpu.speed()));
-  ui->freq_val->setText(QString::fromStdString(cpu.frequencies()));
+  ui->freq_val->setText(QString::fromStdString(sys_info[3]));
   ui->thread_val->setText(QString::fromStdString(cpu.threads()));
-  ui->byte_order_val->setText(QString::fromStdString(cpu.byte_ordering()));
+  ui->byte_order_val->setText(QString::fromStdString(sys_info[5]));
   ui->phy_mem_val->setText(QString::fromStdString(cpu.physical_mem()));
   ui->virt_mem_val->setText(QString::fromStdString(cpu.virtual_mem()));
   ui->swap_mem_val->setText(QString::fromStdString(cpu.swap_mem()));
