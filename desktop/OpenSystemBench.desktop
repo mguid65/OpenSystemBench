@@ -4,4 +4,4 @@ Type=Application
 Name=OpenSystemBench
 Comment=Open Source system benchmarking
 Exec=/usr/bin/OpenSystemBench
-Icon=/usr/share/icons/OSBLogo.svg
+Icon=/usr/share/icons/OSBLogo_25_round.png

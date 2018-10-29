@@ -44,7 +44,7 @@ class CPUInfo {
     const string model();
     const string speed();
     const string threads();
-    const string frequencies();
+    //const string frequencies();
     const string byte_ordering();
     const string physical_mem();
     const string virtual_mem();
@@ -55,7 +55,7 @@ class CPUInfo {
     string m_model_name{""};
     string m_clock_speed{""};
     string m_byte_order{""};
-    string m_frequencies{""};
+    //string m_frequencies{""};
     string m_num_threads{""};
     string m_physical_mem{""};
     string m_virtual_mem{""};

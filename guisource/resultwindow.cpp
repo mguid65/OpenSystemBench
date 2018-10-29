@@ -131,14 +131,14 @@ void ResultWindow::getCpuInfo() {
   sys_info.push_back(cpu.vendor());
   sys_info.push_back(cpu.model());
   sys_info.push_back(cpu.speed());
-  sys_info.push_back(cpu.frequencies());
+  //sys_info.push_back(cpu.frequencies());
   sys_info.push_back(cpu.threads());
   sys_info.push_back(cpu.byte_ordering());
   sys_info.push_back(cpu.physical_mem());
   sys_info.push_back(cpu.virtual_mem());
   sys_info.push_back(cpu.swap_mem());
 
-  for(int i = 0; i < sys_info.size(); i++) {
+  for(size_t i = 0; i < sys_info.size(); i++) {
     if((sys_info[i].find('\n') != string::npos))
       sys_info[i].erase(sys_info[i].find(EOF));
   }
@@ -146,12 +146,12 @@ void ResultWindow::getCpuInfo() {
   ui->vendor_val->setText(QString::fromStdString(sys_info[0]));
   ui->model_val->setText(QString::fromStdString(sys_info[1]));
   ui->speed_val->setText(QString::fromStdString(sys_info[2]));
-  ui->freq_val->setText(QString::fromStdString(sys_info[3]));
-  ui->thread_val->setText(QString::fromStdString(sys_info[4]));
-  ui->byte_order_val->setText(QString::fromStdString(sys_info[5]));
-  ui->phy_mem_val->setText(QString::fromStdString(sys_info[6]));
-  ui->virt_mem_val->setText(QString::fromStdString(sys_info[7]));
-  ui->swap_mem_val->setText(QString::fromStdString(sys_info[8]));
+  //ui->freq_val->setText(QString::fromStdString(sys_info[3]));
+  ui->thread_val->setText(QString::fromStdString(sys_info[3]));
+  ui->byte_order_val->setText(QString::fromStdString(sys_info[4]));
+  ui->phy_mem_val->setText(QString::fromStdString(sys_info[5]));
+  ui->virt_mem_val->setText(QString::fromStdString(sys_info[6]));
+  ui->swap_mem_val->setText(QString::fromStdString(sys_info[7]));
 }
 
 
@@ -201,30 +201,39 @@ void ResultWindow::on_submit_button_clicked()
 {
     if(standard_flag) {
         //start json string manually
-        std::string json_str = "{ ";
+        std::string json_str = "{ \"Result\" : { \"ScoreList\" : [ ";
 
         for(int i = 0; i < names.length(); i++) {
-          json_str.append("\"" + names[i].toLocal8Bit() + "Time\" : ");
+          json_str.append("{ \"Name\" : \"" + names[i].toLocal8Bit() + "\", ");
+          json_str.append(" \"Time\" : ");
           json_str.append(std::to_string(results[static_cast<unsigned long>(i)]) + ", ");
-          json_str.append("\"" + names[i].toLocal8Bit() + "Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + ", ");
+          json_str.append("\"Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + " } ");
+          if(i + 1 < names.length()) {
+              json_str.append(", ");
+          } else {
+              json_str.append(" ], ");
+          }
         }
 
-        json_str.append("\"totalTime\" : " + std::to_string(totalTime) + ", ");
-        json_str.append("\"totalScore\" : " + std::to_string(totalScore) + ", ");
+        json_str.append("\"TotalTime\" : " + std::to_string(totalTime) + ", ");
+        json_str.append("\"TotalScore\" : " + std::to_string(totalScore) + ", ");
 
         if(ocflag)
-          json_str.append("\"overclocked\" : true");
+          json_str.append("\"Overclocked\" : true }, \"Specs\" : { ");
         else
-          json_str.append("\"overclocked\" : false");
+          json_str.append("\"Overclocked\" : false },  \"Specs\" : { ");
 
-        for(unsigned int i = 0; i < sys_info.size(); i++) {
+        for(size_t i = 0; i < sys_info.size(); i++) {
           //create tmp string to strip unexpected characters ie \0 EOF from string
           string tmp_info = sys_info[i];
           tmp_info.erase(std::remove(tmp_info.begin(), tmp_info.end(), '\0'), tmp_info.end());
-          json_str.append(", \"" + sys_info_labels[i] + "\" : \"" + tmp_info + "\" ");
+          json_str.append("\"" + sys_info_labels[i] + "\" : \"" + tmp_info + "\"");
+          if(i + 1 < sys_info.size()) {
+              json_str.append(", ");
+          }
         }
-        json_str.append(" }");
-        std::cout << json_str;
+        json_str.append(" } }");
+        std::cout << json_str << '\n';
         SubmitWindow submitWindow(json_str);
         submitWindow.exec();
     }

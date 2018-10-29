@@ -23,7 +23,7 @@ CPUInfo::CPUInfo()
   m_model_name.erase(pos-2, 10);
   // threads
   //uint32_t num_threads = std::thread::hardware_concurrency();
-  m_num_threads += to_string(std::thread::hardware_concurrency());
+  m_num_threads += to_string(std::thread::hardware_concurrency()); //this number is higher if hardware simultaneous multithreading is enabled
 
   struct sysinfo memInfo;
   sysinfo (&memInfo);
@@ -69,13 +69,14 @@ const string CPUInfo::byte_ordering(){
   return m_byte_order;
 }
 
+/*
 const string CPUInfo::frequencies(){
   // frequencies
   struct timezone tz;
   struct timeval start, stop;
   uint64_t cycles[2];
   long ms;
-  unsigned long mhz;
+  long mhz;
   memset(&tz, 0, sizeof(tz));
   gettimeofday(&start, &tz);
   __asm__ volatile (".byte 0x0f, 0x31" : "=A" (cycles[0])); // read timestamp counter ito edx:eax and put in it cycles
@@ -85,10 +86,11 @@ const string CPUInfo::frequencies(){
   __asm__ volatile (".byte 0x0f, 0x31" : "=A" (cycles[1]));
   gettimeofday(&stop, &tz);
   ms = ((stop.tv_sec - start.tv_sec)*1000000) + (stop.tv_usec - start.tv_usec);
-  mhz = static_cast<unsigned long>((cycles[1] - cycles[0]) / static_cast<unsigned long>(ms));
+  mhz = labs(static_cast<long>((cycles[1] - cycles[0]) / static_cast<long>(ms)));
   m_frequencies += to_string(mhz) + " MHz";
   return m_frequencies;
 }
+*/
 
 const string CPUInfo::virtual_mem(){
   return m_virtual_mem;

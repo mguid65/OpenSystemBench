@@ -84,8 +84,33 @@ void SubmitWindow::on_submitButton_clicked() {
         curl_easy_cleanup(curl);
         curl_global_cleanup();
         this->close();
-      } else if (response_code == 521) {
-        ui->responseLabel->setText("521 Web server is down: \n");
+      } else {
+        switch(response_code) {
+          case 400:
+            ui->responseLabel->setText("400 Bad request");
+            break;
+          case 401:
+            ui->responseLabel->setText("401 Unauthorized");
+            break;
+          case 403:
+            ui->responseLabel->setText("403 Forbidden");
+            break;
+          case 404:
+            ui->responseLabel->setText("404 Not found");
+            break;
+          case 418:
+            ui->responseLabel->setText("418 Im a teapot");
+            break;
+          case 500:
+            ui->responseLabel->setText("500 Internal server error");
+            break;
+          case 512:
+            ui->responseLabel->setText("521 Web server is down");
+            break;
+          default:
+            ui->responseLabel->setText("An unknown error occured");
+            break;
+        }
       }
     }
   }
