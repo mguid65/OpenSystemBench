@@ -70,7 +70,7 @@ INCLUDEPATH += \
     headers/ \
     ../boost/
 
-LIBS        += -L$$GMP_PREFIX/lib -lgomp -lws2_32
+LIBS        += -L$$GMP_PREFIX/lib -lws2_32 -lgomp
 
 CONFIG      += static
 
