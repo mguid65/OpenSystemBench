@@ -31,6 +31,10 @@
   <property name="windowTitle">
    <string>Configuration</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icon/OSBLogo.ico</normaloff>../icon/OSBLogo.ico</iconset>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QRadioButton" name="stan_radio">
     <property name="geometry">
@@ -84,9 +88,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>80</y>
+      <y>90</y>
       <width>311</width>
-      <height>271</height>
+      <height>261</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -324,7 +328,7 @@
      <x>0</x>
      <y>0</y>
      <width>350</width>
-     <height>25</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

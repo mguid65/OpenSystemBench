@@ -31,10 +31,8 @@ SOURCES += \
     guisource/resultwindow.cpp \
     guisource/benchbuilder.cpp \
     guisource/submitwindow.cpp \
-    guisource/notstandarderror.cpp \
     guisource/runninglog.cpp \
     guisource/thread.cpp \
-    guisource/nooptionsselected.cpp \
     guisource/genericdialog.cpp \
     algorithms/algorithm.cpp \
     algorithms/nbody.cpp \
@@ -52,9 +50,7 @@ HEADERS += \
     headers/resultwindow.h \
     headers/benchbuilder.h \
     headers/thread.h \
-    headers/nooptionsselected.h \
     headers/submitwindow.h \
-    headers/notstandarderror.h \
     headers/logger.h \
     headers/genericdialog.h \
     algorithms/headers/algorithm.h \
@@ -66,9 +62,7 @@ FORMS += \
     guistructure/configwindow.ui \
     guistructure/runningwindow.ui \
     guistructure/resultwindow.ui \
-    guistructure/nooptionsselected.ui \
     guistructure/submitwindow.ui \
-    guistructure/notstandarderror.ui \
     guistructure/genericdialog.ui
 
 INCLUDEPATH += \

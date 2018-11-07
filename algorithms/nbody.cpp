@@ -212,17 +212,16 @@ public:
 
 NBody::NBody(){}
 double NBody::runAlgorithm() {
-    //std::future<double> ret = std::async(&runThread);
-    //return ret.get();
     const int n = 50000000;
     auto begin = std::chrono::high_resolution_clock::now();
+
     NBodySystem bodies;
-  //printf("%.9f\n", bodies.energy());
     for (int i=0; i<n; ++i)
         bodies.advance(0.01);
-  //nprintf("%.9f\n", bodies.energy());
+
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
+
     return duration;
 }
 string NBody::getName() {

@@ -111,12 +111,12 @@ void ConfigWindow::on_run_button_clicked()
 
             }
             else {
-                NoOptionsSelected errDialog;
+                genericDialog errDialog("No Options Selected", "OK", "Error");
                 errDialog.exec();
             }
         }
         else {
-            NoOptionsSelected errDialog;
+            genericDialog errDialog("No Options Selected", "OK", "Error");
             errDialog.exec();
         }
     }

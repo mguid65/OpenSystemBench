@@ -2,7 +2,7 @@
 #define CONFIGWINDOW_H
 
 #include "headers/runningwindow.h"
-#include "headers/nooptionsselected.h"
+#include "headers/genericdialog.h"
 #include <QMainWindow>
 
 namespace Ui {

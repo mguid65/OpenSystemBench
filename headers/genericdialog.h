@@ -12,7 +12,7 @@ class genericDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit genericDialog(QString label_text, QString ok_text, QWidget *parent = nullptr);
+    explicit genericDialog(QString label_text, QString ok_text, QString window_title, QWidget *parent = nullptr);
     ~genericDialog();
 
 private slots:

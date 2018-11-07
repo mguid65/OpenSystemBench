@@ -42,5 +42,5 @@ void RunningWindow::handleFinished(QStringList names) {
     this->close();
     resultWindow = new ResultWindow(standard_flag, ocflag,results, names_, nullptr);
     resultWindow->show();
-    resultWindow->displayResults();
+    resultWindow->display_results();
 }
