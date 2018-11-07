@@ -61,7 +61,7 @@ void BenchBuilder::runBench() {
     }
     //the next few lines are only for user experience
     emit pass->signalText(QString::fromStdString("Finished!"));
-    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     emit pass->finished(names);
 }
 /* if standard option in config just create a vector with all available algorithms */

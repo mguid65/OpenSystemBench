@@ -18,10 +18,13 @@ CPUInfo::CPUInfo()
   }
 
   // clock speed
-  unsigned long pos = m_model_name.find("@")+2;
+  int pos;
+  if((pos = m_model_name.find("@")) != string::npos) {
+    m_model_name.erase(pos, m_model_name.length());
+  }
   // m_clock_speed += m_model_name.substr(pos, m_model_name.length());
 
-  m_model_name.erase(pos-2, 10);
+  //m_model_name.erase(p, 10);
   // threads
   //uint32_t num_threads = std::thread::hardware_concurrency();
   m_num_threads += to_string(std::thread::hardware_concurrency()); //this number is higher if hardware simultaneous multithreading is enabled
@@ -74,22 +77,26 @@ const string CPUInfo::byte_ordering(){
 
 const string CPUInfo::speed(){
   // frequencies
-  struct timezone tz;
-  struct timeval start, stop;
-  uint64_t cycles[2];
-  long ms;
-  double mhz;
-  memset(&tz, 0, sizeof(tz));
-  gettimeofday(&start, &tz);
-  __asm__ volatile (".byte 0x0f, 0x31" : "=A" (cycles[0])); // read timestamp counter ito edx:eax and put in it cycles
-  gettimeofday(&start, &tz);
-  usleep(250000);
-  gettimeofday(&stop, &tz);
-  __asm__ volatile (".byte 0x0f, 0x31" : "=A" (cycles[1]));
-  gettimeofday(&stop, &tz);
-  ms = ((stop.tv_sec - start.tv_sec)*1000000) + (stop.tv_usec - start.tv_usec);
-  mhz = labs(static_cast<long>((cycles[1] - cycles[0]) / static_cast<long>(ms)));
-  m_clock_speed += to_string(mhz/1000.0) + " MHz";
+  double mhz = 10000;
+  while(mhz >= 10000) {
+      struct timezone tz;
+      struct timeval start, stop;
+      uint64_t cycles[2];
+      long ms;
+      memset(&tz, 0, sizeof(tz));
+      gettimeofday(&start, &tz);
+      __asm__ volatile (".byte 0x0f, 0x31" : "=A" (cycles[0])); // read timestamp counter ito edx:eax and put in it cycles
+      gettimeofday(&start, &tz);
+      usleep(250000);
+      gettimeofday(&stop, &tz);
+      __asm__ volatile (".byte 0x0f, 0x31" : "=A" (cycles[1]));
+      gettimeofday(&stop, &tz);
+      ms = ((stop.tv_sec - start.tv_sec)*1000000) + (stop.tv_usec - start.tv_usec);
+      mhz = labs(static_cast<long>((cycles[1] - cycles[0]) / static_cast<long>(ms)));
+  }
+  m_clock_speed += to_string(mhz/1000.0);
+  m_clock_speed.erase(4, m_clock_speed.length());
+  m_clock_speed += " GHz";
   return m_clock_speed;
 }
 
