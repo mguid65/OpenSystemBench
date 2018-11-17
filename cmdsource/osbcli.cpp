@@ -12,6 +12,14 @@ using std::cout;
 using std::cin;
 
 OSBBenchmarkConfig::OSBBenchmarkConfig(){
+  m_sys_info_label.push_back("vendor");
+  m_sys_info_label.push_back("model");
+  m_sys_info_label.push_back("speed");
+  m_sys_info_label.push_back("threads");
+  m_sys_info_label.push_back("byte_Order");
+  m_sys_info_label.push_back("physical");
+  m_sys_info_label.push_back("virtual");
+  m_sys_info_label.push_back("swap");
   reset();
 }
 
@@ -56,6 +64,15 @@ void OSBBenchmarkConfig::show_result_window(){
        << "Virtual Mem: " << cpu.virtual_mem() << "\n"
        << "Swap Mem: " << cpu.swap_mem() << "\n";
   printf("--------------------\n");
+  
+  m_sys_info.push_back(cpu.vendor());
+  m_sys_info.push_back(cpu.model());
+  m_sys_info.push_back(cpu.speed());
+  m_sys_info.push_back(cpu.threads());
+  m_sys_info.push_back(cpu.byte_ordering());
+  m_sys_info.push_back(cpu.physical_mem());
+  m_sys_info.push_back(cpu.virtual_mem());
+  m_sys_info.push_back(cpu.swap_mem());
 
   cout << "\nSelect an option: ";
   while (1){
@@ -78,6 +95,7 @@ void OSBBenchmarkConfig::show_result_window(){
 	  cout << "[ERROR] Non-Standrd Run" << endl;
 	  return;
 	}
+	write_json();
         show_submit_window();
 	break;
       }
@@ -137,6 +155,35 @@ void OSBBenchmarkConfig::save_previous_run(){
   cout << "Results saved to: " + input << "\n";
 }
 
+void OSBBenchmarkConfig::write_json(){
+  m_json_str = "{ \"results\" : [ ";
+  for (const auto& elt : m_time){
+    string alg_name = elt.first;
+    m_json_str.append("{ \"name\" : \"" + alg_name + "\", ");
+    m_json_str.append(" \"time\" : ");
+    m_json_str.append(to_string(m_time[alg_name]) + ", ");
+    m_json_str.append("\"score\" : " + to_string(m_score[alg_name]) + " }, ");
+  }
+  m_json_str.append(" { \"name\" : \"Total\",");
+  m_json_str.append("\"time\" : " + to_string(m_total_time) + ", ");
+  m_json_str.append("\"score\" : " + to_string(m_total_score) + " ");
+  m_json_str.append("} ],");
+  if(m_run_marker["6"]) // overclocked
+    m_json_str.append("\"specs\" : { \"overclocked\" : true, ");
+  else
+    m_json_str.append("\"specs\" : { \"overclocked\" : false, ");
+  for(size_t i = 0; i < m_sys_info.size(); i++) {
+    string tmp_info = m_sys_info[i];
+    tmp_info.erase(std::remove(tmp_info.begin(), tmp_info.end(), '\0'), tmp_info.end());
+    m_json_str.append("\"" + m_sys_info_label[i] + "\" : \"" + tmp_info + "\"");
+    if(i + 1 < m_sys_info.size()) {
+      m_json_str.append(", ");
+    }
+  }
+  m_json_str.append(" } }");
+  std::cout << m_json_str << '\n';
+}
+
 void OSBBenchmarkConfig::show_submit_window(){
   printf("\n--------------------\n"); 
   printf("\nOSB - Main Menu\n\n");
@@ -147,7 +194,7 @@ void OSBBenchmarkConfig::show_submit_window(){
   cout << "Password: " << endl;
   cin >> pw;
   
-  printf("\nSelect an option: ");
+  printf("\nSelect an option: \n");
   printf("[0] - Exit\n");
   printf("[1] - Cancel\n");
   printf("[2] - Submit\n");
@@ -160,7 +207,7 @@ void OSBBenchmarkConfig::show_submit_window(){
     case '2':
     {
       submit sub;
-      sub.do_submission(usr.c_str(),pw.c_str(), "json");
+      sub.do_submission(usr.c_str(),pw.c_str(), m_json_str);
       string res = sub.getError();
       if(res != "") {
         cout << res << endl;
@@ -223,7 +270,7 @@ void OSBBenchmarkConfig::show_main_menu(){
 
 void OSBBenchmarkConfig::set_standard_run(){
   m_bench_type = "STANDARD";
-  vector<string> valid_config = {"1","2","3","4","5"};
+  vector<string> valid_config = {"1","2","3","4","5","6"};
   for (auto& conf : valid_config){
     m_run_marker[conf] = true;
   }
