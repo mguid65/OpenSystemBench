@@ -1,6 +1,8 @@
 #include "../algorithms/headers/algorithm.h"
 #include "osbcli.h"
 #include "../sysinfo/cpuinfo.cpp"
+#include "../headers/submit.h"
+#include <curl/curl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fstream>
@@ -72,6 +74,10 @@ void OSBBenchmarkConfig::show_result_window(){
       }
       case '2':
       {
+	if (m_bench_type != "STANDARD"){
+	  cout << "[ERROR] Non-Standrd Run" << endl;
+	  return;
+	}
         show_submit_window();
 	break;
       }
@@ -132,8 +138,49 @@ void OSBBenchmarkConfig::save_previous_run(){
 }
 
 void OSBBenchmarkConfig::show_submit_window(){
-  printf("\n-----waiting-on-big-gay-matt-----\n");
-  exit(0);
+  printf("\n--------------------\n"); 
+  printf("\nOSB - Main Menu\n\n");
+  string usr{""};
+  cout << "Username: " << endl;
+  cin >> usr;
+  string pw{""};
+  cout << "Password: " << endl;
+  cin >> pw;
+  
+  printf("\nSelect an option: ");
+  printf("[0] - Exit\n");
+  printf("[1] - Cancel\n");
+  printf("[2] - Submit\n");
+
+  string opt{""};
+  cin >> opt;
+  switch(opt[0]){
+    case '0': exit(0);
+    case '1': return;
+    case '2':
+    {
+      submit sub;
+      sub.do_submission(usr.c_str(),pw.c_str(), "json");
+      string res = sub.getError();
+      if(res != "") {
+        cout << res << endl;
+      } else {
+        string response = sub.getResponse();
+	if(response == "200 OK") {
+	  sub.cleanup();
+	} else {
+	  cout << "Response: " << res << endl;
+	}
+      }
+      break;
+    }
+    default:
+    {
+      cout << "\nInvalid option, please try again.\n";
+      cout << "\nSelect an option: ";
+      break;
+    }
+  }
 }
 
 void OSBBenchmarkConfig::show_main_menu(){
