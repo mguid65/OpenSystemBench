@@ -14,8 +14,10 @@ private:
   std::vector<std::string> m_sys_info_label;
   std::map<std::string, bool> m_run_marker;
   std::map<std::string, double> m_time;
+  std::map<std::string, uint64_t> m_time_nano;
   std::map<std::string, double> m_score;
   double m_total_time{0.0};
+  uint64_t m_total_time_nano{0};
   double m_total_score{0.0};
 public:
   OSBBenchmarkConfig();

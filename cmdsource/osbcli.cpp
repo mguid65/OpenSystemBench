@@ -53,11 +53,13 @@ void OSBBenchmarkConfig::show_result_window(){
   printf("CPU Info:\n");
   printf("--------------------\n");
   CPUInfo cpu;
+  string byte_order = cpu.byte_ordering();
+  string model = cpu.model();
   cout << "Vendor: " << cpu.vendor() << "\n"
-       << "Model: " << cpu.model() << "\n"
+       << "Model: " << model << "\n"
        << "Speed: " << cpu.speed() << "\n"
        << "Threads: " << cpu.threads() << "\n"
-       << "Byte Order: " << cpu.byte_ordering() << "\n";
+       << "Byte Order: " << byte_order << "\n";
   printf("--------------------\n");
   printf("Memory Info Info:\n");
   cout << "Phys. Mem: " << cpu.physical_mem() << "\n"
@@ -66,10 +68,10 @@ void OSBBenchmarkConfig::show_result_window(){
   printf("--------------------\n");
   
   m_sys_info.push_back(cpu.vendor());
-  m_sys_info.push_back(cpu.model());
+  m_sys_info.push_back(model);
   m_sys_info.push_back(cpu.speed());
   m_sys_info.push_back(cpu.threads());
-  m_sys_info.push_back(cpu.byte_ordering());
+  m_sys_info.push_back(byte_order);
   m_sys_info.push_back(cpu.physical_mem());
   m_sys_info.push_back(cpu.virtual_mem());
   m_sys_info.push_back(cpu.swap_mem());
@@ -161,11 +163,11 @@ void OSBBenchmarkConfig::write_json(){
     string alg_name = elt.first;
     m_json_str.append("{ \"name\" : \"" + alg_name + "\", ");
     m_json_str.append(" \"time\" : ");
-    m_json_str.append(to_string(m_time[alg_name]) + ", ");
+    m_json_str.append(to_string(m_time_nano[alg_name]) + ", ");
     m_json_str.append("\"score\" : " + to_string(m_score[alg_name]) + " }, ");
   }
   m_json_str.append(" { \"name\" : \"Total\",");
-  m_json_str.append("\"time\" : " + to_string(m_total_time) + ", ");
+  m_json_str.append("\"time\" : " + to_string(m_total_time_nano) + ", ");
   m_json_str.append("\"score\" : " + to_string(m_total_score) + " ");
   m_json_str.append("} ],");
   if(m_run_marker["6"]) // overclocked
@@ -312,8 +314,11 @@ void OSBBenchmarkConfig::run_benchmark(){
     cout.flush();
     alg.runAlgorithm();
 
-    m_time[name] = alg.getTime()/1E9;
-    m_score[name] = convert_time_to_score(alg.getTime());
+    m_time[name] = alg.getTime();
+    m_time_nano[name] = static_cast<uint64_t>(m_time[name]);
+    m_total_time_nano += m_time_nano[name];
+    m_time[name] /= 1E9;
+    m_score[name] = convert_time_to_score(m_time[name]);
     
     cout << m_time[name] << "\n";
     //cout << m_score[name] << "\n";
@@ -365,7 +370,6 @@ void OSBBenchmarkConfig::show_custom_menu(){
 
 double OSBBenchmarkConfig::convert_time_to_score(double time){
   m_total_time += time;
-  time /= 1E9;
   double score = (.001/time)*10000000;
   m_total_score += score;
   return score;
