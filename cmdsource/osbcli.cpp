@@ -191,7 +191,7 @@ void OSBBenchmarkConfig::write_json(){
 
 void OSBBenchmarkConfig::show_submit_window(){
   printf("\n--------------------\n"); 
-  printf("\nOSB - Main Menu\n\n");
+  printf("\nOSB - Submit Menu\n\n");
   string usr{""};
   cout << "Username: " << endl;
   cin >> usr;
