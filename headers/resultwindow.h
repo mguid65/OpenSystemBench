@@ -36,7 +36,7 @@ private:
     std::vector<double> m_results;
     std::vector<std::string> m_sys_info;
     std::vector<std::string> m_sys_info_labels {"vendor", "model", "speed", "threads",
-                                              "byte_Order", "physical", "virtual", "swap"};
+                                              "byte_order", "physical", "virtual", "swap"};
     double m_total_time = 0;
     double m_total_score = 0;
 
