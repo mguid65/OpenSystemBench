@@ -96,7 +96,10 @@ void OSBBenchmarkConfig::show_result_window(){
 	if (m_bench_type != "STANDARD"){
 	  cout << "[ERROR] Non-Standrd Run" << endl;
 	  return;
-	}
+	} else if(m_submit_flag){
+          cout << "Score already submitted during this run" << endl;
+          break;
+        }
 	write_json();
         show_submit_window();
 	break;
@@ -216,9 +219,10 @@ void OSBBenchmarkConfig::show_submit_window(){
       } else {
         string response = sub.getResponse();
 	if(response == "200 OK") {
+	  cout << "Response: " << response << endl;
 	  sub.cleanup();
 	} else {
-	  cout << "Response: " << res << endl;
+	  cout << "Response: " << response << endl;
 	}
       }
       break;
@@ -230,6 +234,7 @@ void OSBBenchmarkConfig::show_submit_window(){
       break;
     }
   }
+  m_submit_flag = true;
 }
 
 void OSBBenchmarkConfig::show_main_menu(){

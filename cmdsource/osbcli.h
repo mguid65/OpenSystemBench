@@ -33,5 +33,6 @@ public:
   void write_json();
   double convert_time_to_score(double time);
   bool check_dir(const char* path);
+  bool m_submit_flag{false};
 };
 
