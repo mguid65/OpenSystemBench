@@ -1,6 +1,6 @@
 #include "submitwindow.h"
 #include "ui_submitwindow.h"
-#include <curl/curl.h>
+#include "submit.h"
 #include <iostream>
 /* parameterized constructor grenerated by qt creator
  * takes a parent window
@@ -27,91 +27,22 @@ void SubmitWindow::on_cancelButton_clicked() {
    directly based on example from libcurl
 */
 
-size_t write_data(void *buffer, size_t size, size_t nmemb, void *userp)
-{
-   return size * nmemb;
-}
-
 void SubmitWindow::on_submitButton_clicked() {
-  CURL *curl;
-  CURLcode res;
-
-  curl_global_init(CURL_GLOBAL_DEFAULT);
-  curl = curl_easy_init();
-  if(curl) {
-    curl_easy_setopt(curl, CURLOPT_URL, "https://opensystembench.com/submit");
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
-#ifdef SKIP_PEER_VERIFICATION
-    /*
-     * If you want to connect to a site who isn't using a certificate that is
-     * signed by one of the certs in the CA bundle you have, you can skip the
-     * verification of the server's certificate. This makes the connection
-     * A LOT LESS SECURE.
-     *
-     * If you have a CA cert for the server stored someplace else than in the
-     * default bundle, then the CURLOPT_CAPATH option might come handy for
-     * you.
-     */
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-#endif
-
-#ifdef SKIP_HOSTNAME_VERIFICATION
-    /*
-     * If the site you're connecting to uses a different host name that what
-     * they have mentioned in their server certificate's commonName (or
-     * subjectAltName) fields, libcurl will refuse to connect. You can skip
-     * this check, but this will make the connection less secure.
-     */
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
-#endif
-    curl_easy_setopt(curl, CURLOPT_USERNAME, ui->username_val->text().toStdString().c_str());
-    curl_easy_setopt(curl, CURLOPT_PASSWORD, ui->password_val->text().toStdString().c_str());
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_str.c_str());
-    curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, -1L);
-    //curl_easy_setopt(curl, CURLOPT_AB);
-    /* Perform the request, res will get the return code */
-    res = curl_easy_perform(curl);
-
-    /* Check for errors */
-    if(res != CURLE_OK) {
-      ui->responseLabel->setText("HTTPS Post Request failed: " + QString(curl_easy_strerror(res)) + '\n');
+  submit sub;
+  sub.do_submission( ui->username_val->text().toStdString(), ui->password_val->text().toStdString(), json_str);
+  std::string res = sub.getError();
+  /* Check for errors */
+  if(res != "") {
+    ui->responseLabel->setText(QString(res.c_str())); //QString doesnt have a std::string constructor
+  } else {
+    std::string response = sub.getResponse();
+    if(response == "200 OK") {
+      /* always cleanup */
+      ui->submitButton->setEnabled(false);
+      sub.cleanup();
+      this->close();
     } else {
-      long response_code;
-      curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
-      if(response_code == 200) {
-        /* always cleanup */
-        ui->submitButton->setEnabled(false);
-        curl_easy_cleanup(curl);
-        curl_global_cleanup();
-        this->close();
-      } else {
-        switch(response_code) {
-          case 400:
-            ui->responseLabel->setText("400 Bad request");
-            break;
-          case 401:
-            ui->responseLabel->setText("401 Unauthorized");
-            break;
-          case 403:
-            ui->responseLabel->setText("403 Forbidden");
-            break;
-          case 404:
-            ui->responseLabel->setText("404 Not found");
-            break;
-          case 418:
-            ui->responseLabel->setText("418 Im a teapot");
-            break;
-          case 500:
-            ui->responseLabel->setText("500 Internal server error");
-            break;
-          case 512:
-            ui->responseLabel->setText("521 Web server is down");
-            break;
-          default:
-            ui->responseLabel->setText("An unknown error occured");
-            break;
-        }
-      }
+      ui->responseLabel->setText(QString(response.c_str()));
     }
   }
 }

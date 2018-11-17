@@ -56,7 +56,8 @@ HEADERS += \
     algorithms/headers/algorithm.h \
     algorithms/headers/algorithminterface.h \
     algorithms/headers/abstract.h \
-    sysinfo/cpuinfo.h
+    sysinfo/cpuinfo.h \
+    headers/submit.h
 
 FORMS += \
     guistructure/configwindow.ui \
