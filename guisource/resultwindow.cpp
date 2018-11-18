@@ -30,9 +30,8 @@ ResultWindow::~ResultWindow() {
 }
 /* method to convert time to score */
 double ResultWindow::time_to_score(double time) {
-    time/= 1E9;
     m_total_time +=time;
-    double score = (.001/time)*10000000;
+    double score = (.001/(time/1E9))*10000000;
     m_total_score +=score;
     return score;
 }
@@ -108,7 +107,7 @@ void ResultWindow::display_results() {
     totalStr->setFlags(totalStr->flags() ^ Qt::ItemIsEditable);
     totalStr->setTextAlignment( Qt::AlignCenter);
 
-    totTime->setData(Qt::DisplayRole, QVariant(m_total_time));
+    totTime->setData(Qt::DisplayRole, QVariant(m_total_time/1E9));
     totTime->setFlags(totTime->flags() ^ Qt::ItemIsEditable);
     totTime->setTextAlignment( Qt::AlignCenter);
 
@@ -196,7 +195,7 @@ void ResultWindow::on_submit_button_clicked()
 {
     if(m_standard_flag) {
         //start json string manually
-        std::string json_str = "{ \"results\" : [ ";
+        std::string json_str = "{ \"scores\" : [ ";
 
         for(int i = 0; i < m_names.length(); i++) {
           json_str.append("{ \"name\" : \"" + m_names[i].toLocal8Bit() + "\", ");
