@@ -47,6 +47,9 @@ void OSBBenchmarkConfig::show_result_window(){
 	 << "|" << std::fixed /*<< std::setprecision(6) */
 	 << m_score[name] << "       |" << endl;  
   }
+  cout << "|" << setw(20) << "Total" << setw(25)
+       << "|"+to_string(m_total_time) << setw(1)
+       << "|" << std::fixed << m_total_score << "      |" << endl;
   cout << "------------------------------------------------------------------" << endl;
 
   printf("\n--------------------\n");
@@ -277,7 +280,7 @@ void OSBBenchmarkConfig::show_main_menu(){
 
 void OSBBenchmarkConfig::set_standard_run(){
   m_bench_type = "STANDARD";
-  vector<string> valid_config = {"1","2","3","4","5","6"};
+  vector<string> valid_config = {"1","2","3","4","5"};
   for (auto& conf : valid_config){
     m_run_marker[conf] = true;
   }
