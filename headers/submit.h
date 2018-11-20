@@ -15,8 +15,8 @@ public:
     curl_global_init(CURL_GLOBAL_DEFAULT);
     curl = curl_easy_init();
     if(curl) {
-      curl_easy_setopt(curl, CURLOPT_URL, "https://opensystembench.com/results/submit");
-      curl_easy_setopt(curl, CURLOPT_URL, "ssh.opensystembench.com:443/results/submit");
+      curl_easy_setopt(curl, CURLOPT_URL, "https://opensystembench.com/api/results/submit");
+      //curl_easy_setopt(curl, CURLOPT_URL, "ssh.opensystembench.com:443/results/submit");
       curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_data);
 #ifdef SKIP_PEER_VERIFICATION
     /*

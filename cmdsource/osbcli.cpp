@@ -164,7 +164,7 @@ void OSBBenchmarkConfig::save_previous_run(){
 }
 
 void OSBBenchmarkConfig::write_json(){
-  m_json_str = "{ \"results\" : [ ";
+  m_json_str = "{ \"scores\" : [ ";
   for (const auto& elt : m_time){
     string alg_name = elt.first;
     m_json_str.append("{ \"name\" : \"" + alg_name + "\", ");
