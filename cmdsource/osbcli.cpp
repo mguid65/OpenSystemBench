@@ -142,7 +142,7 @@ void OSBBenchmarkConfig::save_previous_run(){
   cin >> input;
   if (input == "0") return;
   if (!check_dir(input.c_str())) {
-    string make_dir = "mmkdir -p " + input; 
+    string make_dir = "mkdir -p " + input; 
     if(system(make_dir.c_str()) < 0){
       cout << "Error: unable to create output directory.\n";
       return;
