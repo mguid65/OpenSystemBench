@@ -5,7 +5,7 @@
 # Run at your own risk
 
 if [[ $EUID -ne 0 ]]; then
-  echo "Script must be run as root\n"
+  echo "Script must be run as root"
   exit 1
 fi
 
@@ -23,6 +23,12 @@ case $reply in
   printf "\nBuilding Binary Package:\n\n"
   qmake -config release
 
+  cd cmdsource
+ 
+  make
+  
+  cd ../
+
   make
 
   read -p "Install Location [default:/usr/bin]: " install_path
@@ -30,7 +36,8 @@ case $reply in
 
   printf "\nInstalling:\n"
 
-  sudo cp ./bin/OpenSystemBench "$install_path"/OpenSystemBench
+  sudo cp ./bin/OpenSystemBench "$install_path"/OpenSystemBench 
+  sudo cp ./bin/OpenSystemBenchCLI "$install_path"/OpenSystemBenchCLI
   sudo cp ./icon/OSBLogo_25_round.png /usr/share/icons/OSBLogo_25_round.png
   sudo cp ./desktop/OpenSystemBench.desktop /usr/share/applications/OpenSystemBench.desktop
 

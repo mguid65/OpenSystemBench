@@ -4,6 +4,6 @@ Conf = osbcli.h
 Sys = ../sysinfo/cpuinfo.h
 Sub = ../headers/submit.h
 all:
-	g++ -Wall -o OpenSystemBenchCLI main.cpp $(Conf) $(Sys) $(Sub) -g \
+	g++ -Wall -o ../bin/OpenSystemBenchCLI main.cpp $(Conf) $(Sys) $(Sub) -g \
 	../algorithms/*.cpp ../algorithms/headers/* \
 	--std=c++14 -lpthread -lgomp -fopenmp -lcurl $(LFLAGS) $(CFLAGS) $(CXXFLAGS)
