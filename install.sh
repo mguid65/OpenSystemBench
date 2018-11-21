@@ -5,7 +5,7 @@
 # Run at your own risk
 
 if [[ $EUID -ne 0 ]]; then
-  echo "Script must be run as root\n"
+  echo "Script must be run as root"
   exit 1
 fi
 
