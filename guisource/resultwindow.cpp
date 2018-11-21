@@ -30,9 +30,8 @@ ResultWindow::~ResultWindow() {
 }
 /* method to convert time to score */
 double ResultWindow::time_to_score(double time) {
-    time/= 1E9;
     m_total_time +=time;
-    double score = (.001/time)*10000000;
+    double score = (.001/(time/1E9))*10000000;
     m_total_score +=score;
     return score;
 }
@@ -108,7 +107,7 @@ void ResultWindow::display_results() {
     totalStr->setFlags(totalStr->flags() ^ Qt::ItemIsEditable);
     totalStr->setTextAlignment( Qt::AlignCenter);
 
-    totTime->setData(Qt::DisplayRole, QVariant(m_total_time));
+    totTime->setData(Qt::DisplayRole, QVariant(m_total_time/1E9));
     totTime->setFlags(totTime->flags() ^ Qt::ItemIsEditable);
     totTime->setTextAlignment( Qt::AlignCenter);
 
@@ -196,27 +195,23 @@ void ResultWindow::on_submit_button_clicked()
 {
     if(m_standard_flag) {
         //start json string manually
-        std::string json_str = "{ \"Result\" : { \"ScoreList\" : [ ";
+        std::string json_str = "{ \"scores\" : [ ";
 
         for(int i = 0; i < m_names.length(); i++) {
-          json_str.append("{ \"Name\" : \"" + m_names[i].toLocal8Bit() + "\", ");
-          json_str.append(" \"Time\" : ");
+          json_str.append("{ \"name\" : \"" + m_names[i].toLocal8Bit() + "\", ");
+          json_str.append(" \"time\" : ");
           json_str.append(std::to_string(m_results[static_cast<unsigned long>(i)]) + ", ");
-          json_str.append("\"Score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + " } ");
-          if(i + 1 < m_names.length()) {
-              json_str.append(", ");
-          } else {
-              json_str.append(" ], ");
-          }
+          json_str.append("\"score\" : " + ui->result_table->item(i,2)->text().toLocal8Bit() + " }, ");
         }
+        json_str.append(" { \"name\" : \"Total\",");
+        json_str.append("\"time\" : " + std::to_string(m_total_time) + ", ");
+        json_str.append("\"score\" : " + std::to_string(m_total_score) + " ");
 
-        json_str.append("\"TotalTime\" : " + std::to_string(m_total_time) + ", ");
-        json_str.append("\"TotalScore\" : " + std::to_string(m_total_score) + ", ");
-
+        json_str.append("} ],");
         if(m_ocflag)
-          json_str.append("\"Overclocked\" : true }, \"Specs\" : { ");
+          json_str.append("\"specs\" : { \"overclocked\" : true, ");
         else
-          json_str.append("\"Overclocked\" : false },  \"Specs\" : { ");
+          json_str.append("\"specs\" : { \"overclocked\" : false, ");
 
         for(size_t i = 0; i < m_sys_info.size(); i++) {
           //create tmp string to strip unexpected characters ie \0 EOF from string
