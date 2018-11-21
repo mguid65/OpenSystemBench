@@ -142,7 +142,7 @@ void OSBBenchmarkConfig::save_previous_run(){
   cin >> input;
   if (input == "0") return;
   if (!check_dir(input.c_str())) {
-    string make_dir = "mmkdir -p " + input; 
+    string make_dir = "mkdir -p " + input; 
     if(system(make_dir.c_str()) < 0){
       cout << "Error: unable to create output directory.\n";
       return;
@@ -165,7 +165,7 @@ void OSBBenchmarkConfig::save_previous_run(){
 }
 
 void OSBBenchmarkConfig::write_json(){
-  m_json_str = "{ \"results\" : [ ";
+  m_json_str = "{ \"scores\" : [ ";
   for (const auto& elt : m_time){
     string alg_name = elt.first;
     m_json_str.append("{ \"name\" : \"" + alg_name + "\", ");
