@@ -159,6 +159,7 @@ void OSBBenchmarkConfig::save_previous_run(){
     string name{elt.first};
     ofs << name << "," << to_string(m_time[name]) << "," << to_string(m_score[name]) <<",\n";
   }
+  ofs << "total," << to_string(m_total_time) << "," << to_string(m_total_score) << ",\n";
   ofs.close();
   cout << "Results saved to: " + input << "\n";
 }
