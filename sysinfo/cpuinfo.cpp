@@ -1,4 +1,5 @@
 #include "cpuinfo.h"
+#include <iostream>
 
 CPUInfo::CPUInfo()
 {
@@ -16,7 +17,7 @@ CPUInfo::CPUInfo()
     m_model_name += string(reinterpret_cast<const char *>(&_model.ecx()), 4);
     m_model_name += string(reinterpret_cast<const char *>(&_model.edx()), 4);
   }
-
+  m_model_name.erase(m_model_name.begin(), std::find_if(m_model_name.begin(), m_model_name.end(), std::bind1st(std::not_equal_to<char>(), ' ')));
   // clock speed
   int pos;
   if((pos = m_model_name.find("@")) != string::npos) {

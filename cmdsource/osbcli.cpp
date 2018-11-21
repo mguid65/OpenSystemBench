@@ -1,6 +1,8 @@
 #include "../algorithms/headers/algorithm.h"
 #include "osbcli.h"
 #include "../sysinfo/cpuinfo.cpp"
+#include "../headers/submit.h"
+#include <curl/curl.h>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fstream>
@@ -10,6 +12,14 @@ using std::cout;
 using std::cin;
 
 OSBBenchmarkConfig::OSBBenchmarkConfig(){
+  m_sys_info_label.push_back("vendor");
+  m_sys_info_label.push_back("model");
+  m_sys_info_label.push_back("speed");
+  m_sys_info_label.push_back("threads");
+  m_sys_info_label.push_back("byte_Order");
+  m_sys_info_label.push_back("physical");
+  m_sys_info_label.push_back("virtual");
+  m_sys_info_label.push_back("swap");
   reset();
 }
 
@@ -37,23 +47,37 @@ void OSBBenchmarkConfig::show_result_window(){
 	 << "|" << std::fixed /*<< std::setprecision(6) */
 	 << m_score[name] << "       |" << endl;  
   }
+  cout << "|" << setw(20) << "Total" << setw(25)
+       << "|"+to_string(m_total_time) << setw(1)
+       << "|" << std::fixed << m_total_score << "      |" << endl;
   cout << "------------------------------------------------------------------" << endl;
 
   printf("\n--------------------\n");
   printf("CPU Info:\n");
   printf("--------------------\n");
   CPUInfo cpu;
+  string byte_order = cpu.byte_ordering();
+  string model = cpu.model();
   cout << "Vendor: " << cpu.vendor() << "\n"
-       << "Model: " << cpu.model() << "\n"
+       << "Model: " << model << "\n"
        << "Speed: " << cpu.speed() << "\n"
        << "Threads: " << cpu.threads() << "\n"
-       << "Byte Order: " << cpu.byte_ordering() << "\n";
+       << "Byte Order: " << byte_order << "\n";
   printf("--------------------\n");
   printf("Memory Info Info:\n");
   cout << "Phys. Mem: " << cpu.physical_mem() << "\n"
        << "Virtual Mem: " << cpu.virtual_mem() << "\n"
        << "Swap Mem: " << cpu.swap_mem() << "\n";
   printf("--------------------\n");
+  
+  m_sys_info.push_back(cpu.vendor());
+  m_sys_info.push_back(model);
+  m_sys_info.push_back(cpu.speed());
+  m_sys_info.push_back(cpu.threads());
+  m_sys_info.push_back(byte_order);
+  m_sys_info.push_back(cpu.physical_mem());
+  m_sys_info.push_back(cpu.virtual_mem());
+  m_sys_info.push_back(cpu.swap_mem());
 
   cout << "\nSelect an option: ";
   while (1){
@@ -72,6 +96,14 @@ void OSBBenchmarkConfig::show_result_window(){
       }
       case '2':
       {
+	if (m_bench_type != "STANDARD"){
+	  cout << "[ERROR] Non-Standrd Run" << endl;
+	  return;
+	} else if(m_submit_flag){
+          cout << "Score already submitted during this run" << endl;
+          break;
+        }
+	write_json();
         show_submit_window();
 	break;
       }
@@ -110,7 +142,7 @@ void OSBBenchmarkConfig::save_previous_run(){
   cin >> input;
   if (input == "0") return;
   if (!check_dir(input.c_str())) {
-    string make_dir = "mmkdir -p " + input; 
+    string make_dir = "mkdir -p " + input; 
     if(system(make_dir.c_str()) < 0){
       cout << "Error: unable to create output directory.\n";
       return;
@@ -127,13 +159,86 @@ void OSBBenchmarkConfig::save_previous_run(){
     string name{elt.first};
     ofs << name << "," << to_string(m_time[name]) << "," << to_string(m_score[name]) <<",\n";
   }
+  ofs << "total," << to_string(m_total_time) << "," << to_string(m_total_score) << ",\n";
   ofs.close();
   cout << "Results saved to: " + input << "\n";
 }
 
+void OSBBenchmarkConfig::write_json(){
+  m_json_str = "{ \"scores\" : [ ";
+  for (const auto& elt : m_time){
+    string alg_name = elt.first;
+    m_json_str.append("{ \"name\" : \"" + alg_name + "\", ");
+    m_json_str.append(" \"time\" : ");
+    m_json_str.append(to_string(m_time_nano[alg_name]) + ", ");
+    m_json_str.append("\"score\" : " + to_string(m_score[alg_name]) + " }, ");
+  }
+  m_json_str.append(" { \"name\" : \"Total\",");
+  m_json_str.append("\"time\" : " + to_string(m_total_time_nano) + ", ");
+  m_json_str.append("\"score\" : " + to_string(m_total_score) + " ");
+  m_json_str.append("} ],");
+  if(m_run_marker["6"]) // overclocked
+    m_json_str.append("\"specs\" : { \"overclocked\" : true, ");
+  else
+    m_json_str.append("\"specs\" : { \"overclocked\" : false, ");
+  for(size_t i = 0; i < m_sys_info.size(); i++) {
+    string tmp_info = m_sys_info[i];
+    tmp_info.erase(std::remove(tmp_info.begin(), tmp_info.end(), '\0'), tmp_info.end());
+    m_json_str.append("\"" + m_sys_info_label[i] + "\" : \"" + tmp_info + "\"");
+    if(i + 1 < m_sys_info.size()) {
+      m_json_str.append(", ");
+    }
+  }
+  m_json_str.append(" } }");
+  std::cout << m_json_str << '\n';
+}
+
 void OSBBenchmarkConfig::show_submit_window(){
-  printf("\n-----waiting-on-big-gay-matt-----\n");
-  exit(0);
+  printf("\n--------------------\n"); 
+  printf("\nOSB - Submit Menu\n\n");
+  string usr{""};
+  cout << "Username: " << endl;
+  cin >> usr;
+  string pw{""};
+  cout << "Password: " << endl;
+  cin >> pw;
+  
+  printf("\nSelect an option: \n");
+  printf("[0] - Exit\n");
+  printf("[1] - Cancel\n");
+  printf("[2] - Submit\n");
+
+  string opt{""};
+  cin >> opt;
+  switch(opt[0]){
+    case '0': exit(0);
+    case '1': return;
+    case '2':
+    {
+      submit sub;
+      sub.do_submission(usr.c_str(),pw.c_str(), m_json_str);
+      string res = sub.getError();
+      if(res != "") {
+        cout << res << endl;
+      } else {
+        string response = sub.getResponse();
+	if(response == "200 OK") {
+	  cout << "Response: " << response << endl;
+	  sub.cleanup();
+	} else {
+	  cout << "Response: " << response << endl;
+	}
+      }
+      break;
+    }
+    default:
+    {
+      cout << "\nInvalid option, please try again.\n";
+      cout << "\nSelect an option: ";
+      break;
+    }
+  }
+  m_submit_flag = true;
 }
 
 void OSBBenchmarkConfig::show_main_menu(){
@@ -218,8 +323,11 @@ void OSBBenchmarkConfig::run_benchmark(){
     cout.flush();
     alg.runAlgorithm();
 
-    m_time[name] = alg.getTime()/1E9;
-    m_score[name] = convert_time_to_score(alg.getTime());
+    m_time[name] = alg.getTime();
+    m_time_nano[name] = static_cast<uint64_t>(m_time[name]);
+    m_total_time_nano += m_time_nano[name];
+    m_time[name] /= 1E9;
+    m_score[name] = convert_time_to_score(m_time[name]);
     
     cout << m_time[name] << "\n";
     //cout << m_score[name] << "\n";
@@ -271,7 +379,6 @@ void OSBBenchmarkConfig::show_custom_menu(){
 
 double OSBBenchmarkConfig::convert_time_to_score(double time){
   m_total_time += time;
-  time /= 1E9;
   double score = (.001/time)*10000000;
   m_total_score += score;
   return score;
