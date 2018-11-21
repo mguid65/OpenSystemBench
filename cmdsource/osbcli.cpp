@@ -7,6 +7,7 @@
 #include <sys/types.h>
 #include <fstream>
 #include <unistd.h>
+#include <termios.h>
 
 using std::cout;
 using std::cin;
@@ -92,24 +93,24 @@ void OSBBenchmarkConfig::show_result_window(){
       case '1':
       {
         show_main_menu();
-	break;
+	      break;
       }
       case '2':
       {
-	if (m_bench_type != "STANDARD"){
-	  cout << "[ERROR] Non-Standrd Run" << endl;
-	  return;
-	} else if(m_submit_flag){
+	      if (m_bench_type != "STANDARD"){
+	        cout << "[ERROR] Non-Standrd Run" << endl;
+	        return;
+	      } else if(m_submit_flag){
           cout << "Score already submitted during this run" << endl;
           break;
         }
-	write_json();
+	      write_json();
         show_submit_window();
-	break;
+	      break;
       }
       case '3':
       {
-	save_previous_run();
+	      save_previous_run();
         break;
       }
       default:
@@ -190,30 +191,42 @@ void OSBBenchmarkConfig::write_json(){
     }
   }
   m_json_str.append(" } }");
-  std::cout << m_json_str << '\n';
+  //std::cout << m_json_str << '\n';
 }
 
 void OSBBenchmarkConfig::show_submit_window(){
   printf("\n--------------------\n"); 
   printf("\nOSB - Submit Menu\n\n");
   string usr{""};
-  cout << "Username: " << endl;
+  cout << "Username: ";
   cin >> usr;
-  string pw{""};
-  cout << "Password: " << endl;
+  cout << "Password: ";
+    
+  termios oldt;
+  tcgetattr(STDIN_FILENO, &oldt);
+  termios newt = oldt;
+  newt.c_lflag &= ~ECHO;
+  tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+
+  string pw;
+  cin.ignore();
   cin >> pw;
-  
-  printf("\nSelect an option: \n");
+
+  tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+
+  printf("\n\nSubmit? \n");
   printf("[0] - Exit\n");
-  printf("[1] - Cancel\n");
-  printf("[2] - Submit\n");
+  printf("[y/Y] - Yes\n");
+  printf("[n/N] - Cancel\n");
 
   string opt{""};
   cin >> opt;
   switch(opt[0]){
     case '0': exit(0);
-    case '1': return;
-    case '2':
+    case 'N':
+    case 'n': return;
+    case 'Y':
+    case 'y':
     {
       submit sub;
       sub.do_submission(usr.c_str(),pw.c_str(), m_json_str);
@@ -222,12 +235,37 @@ void OSBBenchmarkConfig::show_submit_window(){
         cout << res << endl;
       } else {
         string response = sub.getResponse();
-	if(response == "200 OK") {
-	  cout << "Response: " << response << endl;
-	  sub.cleanup();
-	} else {
-	  cout << "Response: " << response << endl;
-	}
+	      if(response == "200 OK") {
+	        cout << "Successfully submitted to the server" << endl;
+	        sub.cleanup();
+	      } else {
+	        cout << "Response: " << response << endl;
+	      }  
+        m_submit_flag = true;
+        cout << "\nSave run?" << endl;
+        printf("[y/Y] - Yes\n");
+        printf("[n/N] - No, Exit\n");
+        string in;
+        cin >> in;
+        switch (in[0]){
+          case 'y':
+          case 'Y':
+          {
+            save_previous_run();
+            exit(0);
+          }
+          case 'n':
+          case 'N':
+          {
+            exit(0);
+          }
+          default:
+          {
+            cout << "\nInvalid option, please try again.\n";
+            cout << "\nSelect an option: ";
+            break;
+          } 
+        }
       }
       break;
     }
@@ -238,7 +276,6 @@ void OSBBenchmarkConfig::show_submit_window(){
       break;
     }
   }
-  m_submit_flag = true;
 }
 
 void OSBBenchmarkConfig::show_main_menu(){
