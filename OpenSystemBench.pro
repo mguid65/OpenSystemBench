@@ -72,12 +72,23 @@ FORMS += \
     guistructure/notstandarderror.ui \
     guistructure/genericdialog.ui
 
-INCLUDEPATH += \
-    headers/ \
-    curl/include/
+win32 {
+    INCLUDEPATH += \
+        headers/ \
+        curl/include/
 
-LIBS        += -L$$GMP_PREFIX/lib -L$$PWD/curl/lib/ -lgomp -lcurl  -lwinmm -lws2_32
+    LIBS        += -L$$GMP_PREFIX/lib -L$$PWD/curl/lib/ -lgomp -lcurl  -lwinmm -lws2_32
+    CONFIG      += static
 
-CONFIG      += static
+    QMAKE_CXXFLAGS += -fopenmp -static -std=c++14 -march=nehalem -DSKIP_PEER_VERIFICATION
+}
+unix {
+    INCLUDEPATH += \
+        headers/
 
-QMAKE_CXXFLAGS += -fopenmp -static -std=c++14 -march=nehalem -DSKIP_PEER_VERIFICATION
+    LIBS        += -L$$GMP_PREFIX/lib -lgomp -lcurl
+
+    CONFIG      += static
+
+    QMAKE_CXXFLAGS += -fopenmp -static -std=c++14
+}
