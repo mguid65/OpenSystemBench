@@ -18,6 +18,11 @@ public:
     ~RunningWindow();
 private:
     ResultWindow * resultWindow;
+    std::vector<double> results;
+    Ui::RunningWindow *ui;
+    bool ocflag;
+    bool standard_flag;
+    QStringList names_;
 public slots:
     void updateText(const QString& text);
     void handleResult(double result);
@@ -25,11 +30,6 @@ public slots:
 private slots:
     void on_quit_button2_clicked();
     void quit();
-private:
-    std::vector<double> results;
-    Ui::RunningWindow *ui;
-    bool ocflag;
-    bool standard_flag;
 };
 
 #endif // RUNNINGWINDOW_H

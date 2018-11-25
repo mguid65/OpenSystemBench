@@ -77,7 +77,8 @@ void ConfigWindow::on_quit_button_clicked()
 void ConfigWindow::on_run_button_clicked()
 {
     standard_flag = ui->stan_radio->isChecked();
-    bool config [9] = { false, false, false, false, false, false, false, false, false };
+    //remove this array and make a map
+    bool config [9] { false, false, false, false, false, false, false, false, false };
     //standard test
     if(ui->stan_radio->isChecked()) {
         config[0] = true;
@@ -90,8 +91,12 @@ void ConfigWindow::on_run_button_clicked()
             config[2] = ui->CPU_check->isChecked();
             config[7] = ui->IO_check->isChecked();
 
-            if(ui->nbody->isChecked() || ui->pidigits->isChecked() || ui->mandelbrot->isChecked()
-               || ui->spectral->isChecked() || ui->binarytrees->isChecked()) {
+            if(ui->nbody->isChecked() ||
+               ui->pidigits->isChecked() ||
+               ui->mandelbrot->isChecked() ||
+               ui->spectral->isChecked() ||
+               ui->binarytrees->isChecked()) {
+
                 //single core
                 config[3] = ui->nbody->isChecked();
                 //single core
@@ -103,14 +108,15 @@ void ConfigWindow::on_run_button_clicked()
                 //IO
                 config[8] = ui->binarytrees->isChecked();
                 createRunWindow(config);
+
             }
             else {
-                NoOptionsSelected errDialog;
+                genericDialog errDialog("No Options Selected", "OK", "Error");
                 errDialog.exec();
             }
         }
         else {
-            NoOptionsSelected errDialog;
+            genericDialog errDialog("No Options Selected", "OK", "Error");
             errDialog.exec();
         }
     }

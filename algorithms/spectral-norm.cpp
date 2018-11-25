@@ -22,7 +22,7 @@
 #include <cmath>
 #include <omp.h>
 #include <chrono>
-#include "../Algorithms/headers/abstract.h"
+#include "../algorithms/headers/abstract.h"
 
 
 inline int A(int i, int j) {
@@ -90,7 +90,7 @@ double SpectralNorm::runAlgorithm() {
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
-    return duration / 1E9;
+    return duration;
 
 }
 SpectralNorm::SpectralNorm(){}

@@ -7,3 +7,5 @@ OpenSystemBench
 OpenSystemBench.pro.user
 opensystembench_plugin_import.cpp
 *.o
+cmdsource/OpenSystemBenchCLI
+Makefile

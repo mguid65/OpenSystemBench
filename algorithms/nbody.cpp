@@ -12,11 +12,13 @@
 #include <cmath>
 #include <cstdlib>
 #include <array>
-#include <immintrin.h>
 #include <chrono>
 #include <thread>
 #include <future>
-#include "../Algorithms/headers/abstract.h"
+
+#include <immintrin.h>
+
+#include "../algorithms/headers/abstract.h"
 
 
 static const double PI = 3.141592653589793;
@@ -210,18 +212,17 @@ public:
 
 NBody::NBody(){}
 double NBody::runAlgorithm() {
-    //std::future<double> ret = std::async(&runThread);
-    //return ret.get();
     const int n = 50000000;
     auto begin = std::chrono::high_resolution_clock::now();
+
     NBodySystem bodies;
-  //printf("%.9f\n", bodies.energy());
     for (int i=0; i<n; ++i)
         bodies.advance(0.01);
-  //nprintf("%.9f\n", bodies.energy());
+
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
-    return duration / 1E9;
+
+    return duration;
 }
 string NBody::getName() {
     return "NBody";

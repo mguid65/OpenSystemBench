@@ -38,8 +38,9 @@ void RunningWindow::handleResult(double result){
 }
 /*handle finished by closing the running window and creating a result window */
 void RunningWindow::handleFinished(QStringList names) {
+    names_ = names;
     this->close();
-    resultWindow = new ResultWindow(standard_flag, ocflag,results, names,0);
+    resultWindow = new ResultWindow(standard_flag, ocflag,results, names_, nullptr);
     resultWindow->show();
-    resultWindow->displayResults();
+    resultWindow->display_results();
 }
