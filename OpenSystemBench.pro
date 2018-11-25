@@ -53,6 +53,7 @@ HEADERS += \
     headers/submitwindow.h \
     headers/logger.h \
     headers/genericdialog.h \
+    headers/submit.h \
     algorithms/headers/algorithm.h \
     algorithms/headers/algorithminterface.h \
     algorithms/headers/abstract.h \
@@ -66,11 +67,23 @@ FORMS += \
     guistructure/submitwindow.ui \
     guistructure/genericdialog.ui
 
-INCLUDEPATH += \
-    headers/
+win32 {
+    INCLUDEPATH += \
+        headers/ \
+        curl/include/
 
-LIBS        += -L$$GMP_PREFIX/lib -lgomp -lcurl
+    LIBS        += -L$$GMP_PREFIX/lib -L$$PWD/curl/lib/ -lgomp -lcurl  -lwinmm -lws2_32
+    CONFIG      += static
 
-CONFIG      += static
+    QMAKE_CXXFLAGS += -fopenmp -static -std=c++14 -march=nehalem -DSKIP_PEER_VERIFICATION
+}
+unix {
+    INCLUDEPATH += \
+        headers/
 
-QMAKE_CXXFLAGS += -fopenmp -static -std=c++14
+    LIBS        += -L$$GMP_PREFIX/lib -lgomp -lcurl
+
+    CONFIG      += static
+
+    QMAKE_CXXFLAGS += -fopenmp -static -std=c++14
+}
