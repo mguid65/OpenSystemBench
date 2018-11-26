@@ -82,6 +82,8 @@ void spec_norm() {
 
 }
 
+//implements the runAlgorithm method of AlgorithmInterface
+//returns a runtime
 double SpectralNorm::runAlgorithm() {
 
     auto begin = std::chrono::high_resolution_clock::now();
@@ -93,7 +95,9 @@ double SpectralNorm::runAlgorithm() {
     return duration;
 
 }
-SpectralNorm::SpectralNorm(){}
-string SpectralNorm::getName() {
+
+//implements the getName mehtod of AlgorithmInterface
+//get the name of the algorithm
+std::string SpectralNorm::getName() {
     return "Spectral-Norm";
 }

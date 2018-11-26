@@ -4,8 +4,7 @@
 #include <QPlainTextEdit>
 #include <QScrollBar>
 
-class RunningLog;
-
+//Running log extends a QPlainTextEdit for read only running status information
 class RunningLog : public QPlainTextEdit {
     Q_OBJECT
 public:

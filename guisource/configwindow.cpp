@@ -8,8 +8,8 @@ ConfigWindow::ConfigWindow(QWidget *parent) :
     ui(new Ui::ConfigWindow)
 {
     ui->setupUi(this);
-    ocflag=0;
-    standard_flag=0;
+    m_ocflag=0;
+    m_standard_flag=0;
 }
 
 ConfigWindow::~ConfigWindow()
@@ -21,13 +21,13 @@ void ConfigWindow::quit()
     this->close();
 }
 
-void ConfigWindow::createRunWindow(bool *config_)
+void ConfigWindow::createRunWindow(bool config[])
 {
-    runningWindow = new RunningWindow(standard_flag, ocflag);
+    runningWindow = new RunningWindow(m_standard_flag, m_ocflag);
     runningWindow->show();
 
     QThread* thread = new QThread;
-    Thread* worker = new Thread(config_, runningWindow);
+    Thread* worker = new Thread(config, runningWindow);
 
     worker->moveToThread(thread);
 
@@ -57,8 +57,6 @@ void ConfigWindow::on_cust_radio_toggled(bool checked)
     if(ui->IO_check->isChecked()) {
         ui->binarytrees->setEnabled(true);
     }
-
-    //ui->IO_check->setEnabled(checked & true);
 }
 
 void ConfigWindow::on_quit_button_clicked()
@@ -66,54 +64,17 @@ void ConfigWindow::on_quit_button_clicked()
     quit();
 }
 
-/* I want to split this function to make it easier to understand and maintain
- * There should be a private field with a config array within the config window
- * Each checkbox slot should only set its own array value
- * A seperate function will check if no configurations are set
- * the run function will just run this check function then pass its config to the builder
- *
- * also these classes should not be calling each other, they should have get methods to return data to the next window
+/* I fixed these functions and then all my changes vanished
  */
 void ConfigWindow::on_run_button_clicked()
 {
-    standard_flag = ui->stan_radio->isChecked();
-    //remove this array and make a map
-    bool config [9] { false, false, false, false, false, false, false, false, false };
-    //standard test
-    if(ui->stan_radio->isChecked()) {
-        config[0] = true;
-        createRunWindow(config);
-    } // custom test
-    else {
-        config [1] = true;
-        if(ui->CPU_check->isChecked() || ui->IO_check->isChecked()) {
+    m_standard_flag = ui->stan_radio->isChecked();
 
-            config[2] = ui->CPU_check->isChecked();
-            config[7] = ui->IO_check->isChecked();
-
-            if(ui->nbody->isChecked() ||
-               ui->pidigits->isChecked() ||
-               ui->mandelbrot->isChecked() ||
-               ui->spectral->isChecked() ||
-               ui->binarytrees->isChecked()) {
-
-                //single core
-                config[3] = ui->nbody->isChecked();
-                //single core
-                config[4] = ui->pidigits->isChecked();
-                //multi core
-                config[5] = ui->mandelbrot->isChecked();
-                //multi-core
-                config[6] = ui->spectral->isChecked();
-                //IO
-                config[8] = ui->binarytrees->isChecked();
-                createRunWindow(config);
-
-            }
-            else {
-                genericDialog errDialog("No Options Selected", "OK", "Error");
-                errDialog.exec();
-            }
+    if(m_config[0]) {
+        createRunWindow(m_config);
+    } else {
+        if(m_config[2] || m_config[3] || m_config[4] || m_config[5] || m_config[6]) {
+            createRunWindow(m_config);
         }
         else {
             genericDialog errDialog("No Options Selected", "OK", "Error");
@@ -122,7 +83,11 @@ void ConfigWindow::on_run_button_clicked()
     }
 }
 
-void ConfigWindow::on_CPU_check_toggled(bool checked){
+void ConfigWindow::on_CPU_check_toggled(bool checked)
+{
+    m_config[0] = false;
+    m_config[1] = true;
+
     ui->nbody->setEnabled(checked & true);
     ui->pidigits->setEnabled(checked & true);
     ui->mandelbrot->setEnabled(checked & true);
@@ -134,6 +99,9 @@ void ConfigWindow::on_CPU_check_toggled(bool checked){
 
 void ConfigWindow::on_stan_radio_toggled()
 {
+    m_config[0] = true;
+    m_config[1] = false;
+
     ui->nbody->setEnabled(false);
     ui->pidigits->setEnabled(false);
     ui->mandelbrot->setEnabled(false);
@@ -149,8 +117,33 @@ void ConfigWindow::on_IO_check_toggled(bool checked)
     ui->binarytrees->setEnabled(checked & true);
 }
 
-
 void ConfigWindow::on_ocbutton_toggled()
 {
-    ocflag = ui->ocbutton->isChecked();
+    m_ocflag = ui->ocbutton->isChecked();
+}
+
+//these functions set array positions in the config array
+void ConfigWindow::on_nbody_clicked(bool checked)
+{
+    m_config[2] = checked;
+}
+
+void ConfigWindow::on_pidigits_clicked(bool checked)
+{
+    m_config[3] = checked;
+}
+
+void ConfigWindow::on_mandelbrot_clicked(bool checked)
+{
+    m_config[4] = checked;
+}
+
+void ConfigWindow::on_spectral_clicked(bool checked)
+{
+    m_config[5] = checked;
+}
+
+void ConfigWindow::on_binarytrees_clicked(bool checked)
+{
+    m_config[6] = checked;
 }

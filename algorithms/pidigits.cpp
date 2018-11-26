@@ -22,6 +22,8 @@ double pi_digits(long long digits) {
     return 4.0*sum;
 }
 
+//implements the runAlgorithm method of AlgorithmInterface
+//returns a runtime
 double PiDigits::runAlgorithm() {
 
     auto begin = std::chrono::high_resolution_clock::now();
@@ -33,7 +35,8 @@ double PiDigits::runAlgorithm() {
     return duration;
 }
 
-PiDigits::PiDigits() {}
-string PiDigits::getName() {
+//implements the getName mehtod of AlgorithmInterface
+//get the name of the algorithm
+std::string PiDigits::getName() {
     return "PiDigits";
 }

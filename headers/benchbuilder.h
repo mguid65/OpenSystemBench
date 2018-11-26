@@ -2,14 +2,15 @@
 #include "headers/runningwindow.h"
 #include "headers/thread.h"
 
+//Benchbuilder creates a list of algorithms and runs them
 class BenchBuilder {
     public:
         BenchBuilder();
-        BenchBuilder(bool *config_, RunningWindow* running_, Thread * pass);
+        BenchBuilder(bool config[], RunningWindow* running, Thread *pass);
         void runBench();
         void createStandardBench();
-        std::vector <Algorithm> algList;
     private:
-        RunningWindow *running;
-        Thread * pass;
+        RunningWindow *m_running;
+        Thread *m_pass;
+        std::vector <Algorithm> m_algList;
 };

@@ -57,6 +57,8 @@ int bin_tree() {
   return 0;
 }
 
+//implements the runAlgorithm method of AlgorithmInterface
+//returns a runtime
 double BinaryTrees::runAlgorithm()
 {
     auto begin = std::chrono::high_resolution_clock::now();
@@ -67,7 +69,9 @@ double BinaryTrees::runAlgorithm()
     auto duration = std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count();
     return duration;
 }
-BinaryTrees::BinaryTrees(){}
-string BinaryTrees::getName() {
+
+//implements the getName mehtod of AlgorithmInterface
+//get the name of the algorithm
+std::string BinaryTrees::getName() {
     return "Binary-Trees";
 }

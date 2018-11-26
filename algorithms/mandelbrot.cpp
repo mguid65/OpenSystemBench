@@ -115,7 +115,8 @@ int mand()
     return 0;
 }
 
-Mandelbrot::Mandelbrot() {}
+//implements the runAlgorithm method of AlgorithmInterface
+//returns a runtime
 double Mandelbrot::runAlgorithm()
 {
 
@@ -129,6 +130,8 @@ double Mandelbrot::runAlgorithm()
     return duration;
 }
 
+//implements the getName mehtod of AlgorithmInterface
+//get the name of the algorithm
 string Mandelbrot::getName() {
     return "Mandelbrot";
 }

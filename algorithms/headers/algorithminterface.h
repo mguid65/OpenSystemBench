@@ -5,13 +5,13 @@
 #define ALGORITHMINTERFACE_H
 
 #include <string>
-using namespace std;
 
+//Algorithm Interface models the interface methods to a concrete algorithm
 class AlgorithmInterface {
-    public:
-        virtual string getName() = 0;
-        virtual double runAlgorithm() = 0;
-        virtual ~AlgorithmInterface(){}
+public:
+    virtual std::string getName() = 0;
+    virtual double runAlgorithm() = 0;
+    virtual ~AlgorithmInterface(){}
 };
 
 #endif /* ALGORITHMINTERFACE_H */

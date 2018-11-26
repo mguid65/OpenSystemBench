@@ -210,7 +210,8 @@ public:
     }
 };
 
-NBody::NBody(){}
+//implements the runAlgorithm method of AlgorithmInterface
+//returns a runtime
 double NBody::runAlgorithm() {
     const int n = 50000000;
     auto begin = std::chrono::high_resolution_clock::now();
@@ -224,6 +225,9 @@ double NBody::runAlgorithm() {
 
     return duration;
 }
+
+//implements the getName mehtod of AlgorithmInterface
+//get the name of the algorithm
 string NBody::getName() {
     return "NBody";
 }
