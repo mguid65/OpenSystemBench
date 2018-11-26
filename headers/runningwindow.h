@@ -14,7 +14,7 @@ class RunningWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit RunningWindow(bool standard_flag, bool ocflag, QWidget *parent = 0);
+    explicit RunningWindow(bool standard_flag, bool ocflag, QWidget *parent = nullptr);
     ~RunningWindow();
 private:
     ResultWindow * resultWindow;

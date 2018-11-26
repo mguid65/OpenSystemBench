@@ -2,6 +2,7 @@
 #include "headers/thread.h"
 #include "ui_configwindow.h"
 #include <QThread>
+#include <memory>
 
 ConfigWindow::ConfigWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -26,8 +27,8 @@ void ConfigWindow::createRunWindow(bool config[])
     runningWindow = new RunningWindow(m_standard_flag, m_ocflag);
     runningWindow->show();
 
-    QThread* thread = new QThread;
-    Thread* worker = new Thread(config, runningWindow);
+    auto thread = new QThread;
+    auto worker = new Thread(config, runningWindow);
 
     worker->moveToThread(thread);
 
@@ -77,7 +78,7 @@ void ConfigWindow::on_run_button_clicked()
             createRunWindow(m_config);
         }
         else {
-            genericDialog errDialog("No Options Selected", "OK", "Error");
+            genericDialog errDialog("No Options Selected", "OK", "Error", this);
             errDialog.exec();
         }
     }

@@ -12,7 +12,7 @@ class Thread : public QThread
     Q_OBJECT
 
 public:
-    Thread(bool * config, RunningWindow * runningWindow);
+    Thread(bool * config, RunningWindow * runningWindow, QWidget *parent = nullptr);
     ~Thread();
 signals:
     void finished(QStringList);

@@ -223,8 +223,8 @@ void ResultWindow::on_submit_button_clicked()
           }
         }
         json_str.append(" } }");
-        std::cout << json_str << '\n';
-        SubmitWindow submitWindow(json_str);
+
+        SubmitWindow submitWindow(json_str, this);
         submitWindow.exec();
     }
     else {

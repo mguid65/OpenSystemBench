@@ -40,7 +40,7 @@ void RunningWindow::handleResult(double result){
 void RunningWindow::handleFinished(QStringList names) {
     names_ = names;
     this->close();
-    resultWindow = new ResultWindow(standard_flag, ocflag,results, names_, nullptr);
+    resultWindow = new ResultWindow(standard_flag, ocflag,results, names_, this);
     resultWindow->show();
     resultWindow->display_results();
 }

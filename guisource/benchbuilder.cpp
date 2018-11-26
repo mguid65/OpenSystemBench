@@ -19,26 +19,26 @@ BenchBuilder::BenchBuilder(bool config[], RunningWindow *running,Thread *pass) {
     if(config[0]) {
         createStandardBench();
     } else {
-        if(config[2]) m_algList.push_back(new NBody());
-        if(config[3]) m_algList.push_back(new PiDigits());
-        if(config[4]) m_algList.push_back(new Mandelbrot());
-        if(config[5]) m_algList.push_back(new SpectralNorm());
-        if(config[6]) m_algList.push_back(new BinaryTrees());
+        if(config[2]) m_algList.push_back(std::make_unique<Algorithm>(new NBody()));
+        if(config[3]) m_algList.push_back(std::make_unique<Algorithm>(new PiDigits()));
+        if(config[4]) m_algList.push_back(std::make_unique<Algorithm>(new Mandelbrot()));
+        if(config[5]) m_algList.push_back(std::make_unique<Algorithm>(new SpectralNorm()));
+        if(config[6]) m_algList.push_back(std::make_unique<Algorithm>(new BinaryTrees()));
     }
 }
 /* this method runs all algorithms in the vector m_algList */
 void BenchBuilder::runBench() {
     QStringList names;
 
-    for (Algorithm &alg : m_algList ) {
-        std::string name = alg.getName();
+    for (auto &alg : m_algList ) {
+        std::string name = alg->getName();
         QString qname = QString::fromStdString(name);
         names << qname;
         emit m_pass->signalText(qname);
 
-        alg.runAlgorithm();
+        alg->runAlgorithm();
 
-        double time = alg.getTime();
+        double time = alg->getTime();
 
         std::string strtime = std::to_string(time/1E9);
         emit m_pass->signalText(QString::fromStdString(strtime));
@@ -52,9 +52,9 @@ void BenchBuilder::runBench() {
 }
 /* if standard option in config just create a vector with all available algorithms */
 void BenchBuilder::createStandardBench() {
-    m_algList.push_back(new NBody());
-    m_algList.push_back(new PiDigits());
-    m_algList.push_back(new Mandelbrot());
-    m_algList.push_back(new SpectralNorm());
-    m_algList.push_back(new BinaryTrees());
+    m_algList.push_back(std::make_unique<Algorithm>(new NBody()));
+    m_algList.push_back(std::make_unique<Algorithm>(new PiDigits()));
+    m_algList.push_back(std::make_unique<Algorithm>(new Mandelbrot()));
+    m_algList.push_back(std::make_unique<Algorithm>(new SpectralNorm()));
+    m_algList.push_back(std::make_unique<Algorithm>(new BinaryTrees()));
 }
