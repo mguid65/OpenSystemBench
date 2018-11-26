@@ -8,17 +8,17 @@
 
 class OSBBenchmarkConfig{
 private:
-  std::string m_json_str{""};
-  std::string m_bench_type{""};
-  std::vector<std::string> m_sys_info;
-  std::vector<std::string> m_sys_info_label;
-  std::map<std::string, bool> m_run_marker;
-  std::map<std::string, double> m_time;
-  std::map<std::string, uint64_t> m_time_nano;
-  std::map<std::string, double> m_score;
-  double m_total_time{0.0};
-  uint64_t m_total_time_nano{0};
-  double m_total_score{0.0};
+  std::string m_json_str{""}; // the json string necessary for submitting the score
+  std::string m_bench_type{""}; // standard or custom
+  std::vector<std::string> m_sys_info; // all of the system info relative to m_system_info_label
+  std::vector<std::string> m_sys_info_label; // labels for system info
+  std::map<std::string, bool> m_run_marker; // marks which algorithm to run
+  std::map<std::string, double> m_time; // time for each algorithm
+  std::map<std::string, uint64_t> m_time_nano; // time in nano second nessesary for submission
+  std::map<std::string, double> m_score; // score for each algorithm
+  double m_total_time{0.0}; // total time in double
+  uint64_t m_total_time_nano{0}; // total time in nano
+  double m_total_score{0.0}; // total score
 public:
   OSBBenchmarkConfig();
   ~OSBBenchmarkConfig(){};

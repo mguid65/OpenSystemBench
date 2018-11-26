@@ -12,6 +12,7 @@
 using std::cout;
 using std::cin;
 
+// Default constructor, takes no argument, adds all system info labels and call reset
 OSBBenchmarkConfig::OSBBenchmarkConfig(){
   m_sys_info_label.push_back("vendor");
   m_sys_info_label.push_back("model");
@@ -24,6 +25,8 @@ OSBBenchmarkConfig::OSBBenchmarkConfig(){
   reset();
 }
 
+// flip all values of run marker to false.
+// m_run_marker tells which alroithm to run 
 void OSBBenchmarkConfig::reset() {
   vector<string> valid_config = {"1","2","3","4","5","6"};
   for (const auto& conf : valid_config){
@@ -31,6 +34,7 @@ void OSBBenchmarkConfig::reset() {
   }
 }
 
+// show the result window, this is called after each run
 void OSBBenchmarkConfig::show_result_window(){
   printf("\n--------------------\n");
 
@@ -123,6 +127,9 @@ void OSBBenchmarkConfig::show_result_window(){
   }
 }
 
+// check if a directory exist, return true if it does, false if it doesn't.
+// param path gives full path of the directory to be crated
+// this method is called by save previous run
 bool OSBBenchmarkConfig::check_dir(const char* path){
   struct stat info;
   if(stat( path, &info ) != 0)
@@ -133,6 +140,7 @@ bool OSBBenchmarkConfig::check_dir(const char* path){
     return 0;
 }
 
+// allows a client to save a runs result into a csv file
 void OSBBenchmarkConfig::save_previous_run(){
   printf("\n--------------------\n");
   printf("\nOSB - Save Results\n");
@@ -165,6 +173,7 @@ void OSBBenchmarkConfig::save_previous_run(){
   cout << "Results saved to: " + input << "\n";
 }
 
+// create the json neccessary for to submit the run to osb server
 void OSBBenchmarkConfig::write_json(){
   m_json_str = "{ \"scores\" : [ ";
   for (const auto& elt : m_time){
@@ -194,6 +203,9 @@ void OSBBenchmarkConfig::write_json(){
   //std::cout << m_json_str << '\n';
 }
 
+// show the submit window which is called opstionally by user after the result window is shown
+// this window will ask the user for the username and password. 
+// submission can only be completed if the user registered on the webpage
 void OSBBenchmarkConfig::show_submit_window(){
   printf("\n--------------------\n"); 
   printf("\nOSB - Submit Menu\n\n");
@@ -278,6 +290,7 @@ void OSBBenchmarkConfig::show_submit_window(){
   }
 }
 
+// shows the main menu, the very first window that is shown the the program start
 void OSBBenchmarkConfig::show_main_menu(){
   printf("\n--------------------\n");
 
@@ -316,6 +329,7 @@ void OSBBenchmarkConfig::show_main_menu(){
   }
 }
 
+// set the run to standard, run all 5 algorithms 
 void OSBBenchmarkConfig::set_standard_run(){
   m_bench_type = "STANDARD";
   vector<string> valid_config = {"1","2","3","4","5"};
@@ -324,6 +338,8 @@ void OSBBenchmarkConfig::set_standard_run(){
   }
 }
 
+// run all the bench marks that is set to true by m_run_marker
+// show time for each runs and then call the result window
 void OSBBenchmarkConfig::run_benchmark(){
   printf("\n--------------------\n");
   std::vector<Algorithm> algList;
@@ -375,6 +391,8 @@ void OSBBenchmarkConfig::run_benchmark(){
   show_result_window();
 }
 
+// show the custom menu, if the user decide to run non-standard bench mark, this window is called
+// it will promt the users to pick all algorithm they wants to run
 void OSBBenchmarkConfig::show_custom_menu(){
   reset();
   printf("\n--------------------\n");
@@ -414,6 +432,7 @@ void OSBBenchmarkConfig::show_custom_menu(){
   run_benchmark();
 }
 
+// convert each run time of each algorithm to the score.
 double OSBBenchmarkConfig::convert_time_to_score(double time){
   m_total_time += time;
   double score = (.001/time)*10000000;
