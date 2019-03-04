@@ -52,38 +52,7 @@ public:
       if(res != CURLE_OK) {
         error = "HTTPS Post Request failed";
       } else {
-        long response_code;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &response_code);
-        if(response_code == 200) {
-          response = "200 OK";
-        } else {
-          switch(response_code) {
-            case 400:
-              response = "400 Bad request";
-              break;
-            case 401:
-              response = "401 Unauthorized";
-              break;
-            case 403:
-              response = "403 Forbidden";
-              break;
-            case 404:
-              response = "404 Not found";
-              break;
-            case 418:
-              response = "418 Im a teapot";
-              break;
-            case 500:
-              response = "500 Internal server error";
-              break;
-            case 512:
-              response = "521 Web server is down";
-              break;
-            default:
-              response = "An unknown error occured";
-              break;
-          }
-        }
+        error = curl_easy_strerror(res); 
       }
     }
   }
